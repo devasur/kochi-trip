@@ -56,14 +56,16 @@
         }
         
         .header h1 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
         
         .header .subtitle {
-            font-size: 12px;
+            font-size: 14px;
             opacity: 0.9;
+            font-weight: 500;
         }
         
         .progress-bar {
@@ -147,22 +149,25 @@
         }
         
         .card-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
+            letter-spacing: 0.3px;
         }
         
         .card-subtitle {
-            font-size: 12px;
-            opacity: 0.9;
+            font-size: 14px;
+            opacity: 0.95;
             position: relative;
             z-index: 1;
+            font-weight: 500;
         }
         
         .card-content {
-            padding: 20px;
+            padding: 24px 20px;
+            line-height: 1.6;
         }
         
         .table-container {
@@ -183,21 +188,22 @@
         th {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
-            padding: 12px 8px;
-            font-weight: 600;
+            padding: 16px 12px;
+            font-weight: 700;
             text-align: left;
-            font-size: 11px;
+            font-size: 13px;
             position: sticky;
             top: 0;
             z-index: 2;
+            letter-spacing: 0.3px;
         }
         
         td {
-            padding: 12px 8px;
+            padding: 16px 12px;
             border-bottom: 1px solid #f0f0f0;
             vertical-align: top;
-            font-size: 12px;
-            line-height: 1.4;
+            font-size: 14px;
+            line-height: 1.5;
         }
         
         tr:nth-child(even) td {
@@ -211,27 +217,29 @@
         }
         
         .time {
-            font-weight: 600;
+            font-weight: 700;
             color: #2c5aa0;
             white-space: nowrap;
+            font-size: 15px;
         }
         
         .emoji {
-            font-size: 14px;
-            margin-right: 4px;
+            font-size: 16px;
+            margin-right: 6px;
         }
         
         .star {
             color: #ff6b35;
-            font-size: 14px;
+            font-size: 16px;
+            margin-left: 2px;
         }
         
         .info-box {
             border-radius: 12px;
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 13px;
-            line-height: 1.5;
+            padding: 18px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
         }
         
         .warning-box {
@@ -251,17 +259,19 @@
         
         .info-box h3 {
             color: #2c5aa0;
-            font-size: 14px;
-            margin-bottom: 10px;
-            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 14px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
         
         .info-box ul, .info-box ol {
-            padding-left: 16px;
+            padding-left: 18px;
         }
         
         .info-box li {
-            margin-bottom: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
         
         .navigation {
@@ -286,18 +296,19 @@
             color: white;
             border: none;
             border-radius: 25px;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 80px;
+            min-width: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 6px;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            letter-spacing: 0.3px;
         }
         
         .nav-button:active {
@@ -313,10 +324,10 @@
         .card-indicator {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
+            gap: 10px;
+            color: #555;
+            font-size: 15px;
+            font-weight: 600;
         }
         
         .dots-container {
@@ -363,21 +374,47 @@
         /* Very small screens */
         @media (max-width: 320px) {
             .header {
-                padding-left: 10px;
-                padding-right: 10px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .header .subtitle {
+                font-size: 13px;
             }
             
             .cards-container {
-                padding: 0 5px;
+                padding: 0 8px;
             }
             
             .card-content {
-                padding: 15px;
+                padding: 18px 15px;
+            }
+            
+            .card-title {
+                font-size: 16px;
+            }
+            
+            .card-subtitle {
+                font-size: 13px;
             }
             
             th, td {
-                padding: 8px 6px;
-                font-size: 10px;
+                padding: 12px 8px;
+                font-size: 12px;
+            }
+            
+            .nav-button {
+                padding: 12px 18px;
+                font-size: 14px;
+                min-width: 75px;
+            }
+            
+            .card-indicator {
+                font-size: 14px;
             }
         }
         
