@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Kochi Travel Guide 🏛️</title>
+    <meta name="description" content="Complete mobile-friendly travel guide for Kochi, Kerala with restaurants, transport, and itinerary">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Kochi Guide">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .app-container {
+            max-width: 100vw;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(102, 126, 234, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: env(safe-area-inset-top) 20px 15px 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .header .subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 70px);
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            z-index: 999;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #ffd700;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 8.33%;
+        }
+        
+        .cards-container {
+            margin-top: calc(env(safe-area-inset-top) + 100px);
+            padding: 0 10px;
+            padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            margin: 15px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            position: relative;
+        }
+        
+        .card.active {
+            transform: scale(1.02);
+            box-shadow: 0 12px 48px rgba(102, 126, 234, 0.2);
+        }
+        
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='m0 40 40-40h-40v40zm40 0v-40h-40l40 40z'/%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        
+        .card-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 300px;
+            background: white;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 8px;
+            font-weight: 600;
+            text-align: left;
+            font-size: 11px;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        
+        td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        tr:nth-child(even) td {
+            background-color: #fafafa;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%) !important;
+            font-weight: 600;
+            color: #8b4513;
+        }
+        
+        .time {
+            font-weight: 600;
+            color: #2c5aa0;
+            white-space: nowrap;
+        }
+        
+        .emoji {
+            font-size: 14px;
+            margin-right: 4px;
+        }
+        
+        .star {
+            color: #ff6b35;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-left: 4px solid #51cf66;
+        }
+        
+        .contact-box {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            border-left: 4px solid #9775fa;
+        }
+        
+        .info-box h3 {
+            color: #2c5aa0;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .info-box ul, .info-box ol {
+            padding-left: 16px;
+        }
+        
+        .info-box li {
+            margin-bottom: 6px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 20px;
+            padding-bottom: calc(15px + env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        .nav-button:active {
+            transform: scale(0.95);
+        }
+        
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .card-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .dots-container {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+        
+        /* Touch interactions */
+        .card {
+            touch-action: pan-y;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .navigation {
+                background: rgba(30,30,30,0.95);
+                color: white;
+            }
+            
+            .card-indicator {
+                color: #ccc;
+            }
+        }
+        
+        /* Very small screens */
+        @media (max-width: 320px) {
+            .header {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .cards-container {
+                padding: 0 5px;
+            }
+            
+            .card-content {
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 10px;
+            }
+        }
+        
+        /* Animation delays for staggered effect */
+        .card:nth-child(1) { animation-delay: 0s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        
+        /* Loading state */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .card {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            
+            .nav-button:active {
+                transform: none;
+            }
+        }
+        
+        /* Hide cards initially, show via JS */
+        .card {
+            display: none;
+        }
+        
+        .card.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>🏛️ Kochi Travel Guide</h1>
+            <p class="subtitle">Aug 31 - Sep 1, 2025</p>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <div class="cards-container" id="cardsContainer">
+            <!-- CARD 1: COVER -->
+            <div class="card visible">
+                <div class="card-number">1/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🏛️ Welcome to Kochi</h2>
+                    <p class="card-subtitle">Your Complete Travel Guide</p>
+                </div>
+                <div class="card-content">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                <h3 style="color: #28a745; margin-bottom: 8px; font-size: 14px;">🌅 Day 1: Aug 31</h3>
+                                <p style="font-size: 12px; margin: 0;">Drive from Thiruvananthapuram<br>Arrival & Function</p>
+                            </div>
+                            
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                <h3 style="color: #dc3545; margin-bottom: 8px; font-size: 14px;">🏛️ Day 2: Sep 1</h3>
+                                <p style="font-size: 12px; margin: 0;">Full Kochi Exploration<br>Red-eye Flight 2:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>🎯 Trip Highlights</h3>
+                        <ul>
+                            <li><strong>Water Metro Experience</strong> - India's first!</li>
+                            <li><strong>Authentic Kerala Cuisine</strong> - Fish curry & beef specialities</li>
+                            <li><strong>Heritage Sites</strong> - Churches, Palace, Synagogue</li>
+                            <li><strong>Chinese Fishing Nets</strong> - Iconic 14th century nets</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Critical Timing</h3>
+                        <p><strong>Airport: 11:00 PM (Sep 1)<br>Flight: 2:00 AM (Sep 2)</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 2: DAY 1 MORNING -->
+            <div class="card">
+                <div class="card-number">2/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🌅 Day 1 Morning</h2>
+                    <p class="card-subtitle">Thiruvananthapuram to Kochi</p>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">📝</span>Notes</th></tr>
+                            <tr><td class="time">5:00 AM</td><td>Depart Thiruvananthapuram</td><td>🚗 Drive</td><td>220km, NH66/NH544</td></tr>
+                            <tr><td class="time">7:30 AM</td><td>Breakfast Break</td><td>🛑 Stop</td><td>Kollam</td></tr>
+                            <tr><td class="time">9:30 AM</td><td>Rest Stop</td><td>🛑 Stop</td><td>Alappuzha</td></tr>
+                            <tr class="highlight"><td class="time">10:30 AM</td><td><strong>Arrive IMA House</strong></td><td>🏨 Check-in</td><td>Freshen up</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>🛣️ Route Details</h3>
+                        <ul>
+                            <li><strong>Distance:</strong> 220 kilometers</li>
+                            <li><strong>Duration:</strong> 5-6 hours</li>
+                            <li><strong>Route:</strong> NH66 → NH544</li>
+                            <li><strong>Traffic:</strong> Expect delays near Kochi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 3: DAY 1 AFTERNOON -->
+            <div class="card">
+                <div class="card-number">3/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🍽️ Day 1 Afternoon</h2>
+                    <p class="card-subtitle">First Taste of Kochi</p>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">🍽️</span>Location</th></tr>
+                            <tr><td class="time">11:30 AM</td><td>Brunch</td><td>🚶‍♂️ 0.5km</td><td><strong>Grand Restaurant</strong></td></tr>
+                            <tr><td class="time">1:00 PM</td><td>Marine Drive</td><td>🚶‍♂️ Walk</td><td>3km waterfront</td></tr>
+                            <tr><td class="time">2:30 PM</td><td>To Fort Kochi</td><td>🚢 Ferry</td><td>30min journey</td></tr>
+                            <tr class="highlight"><td class="time">3:00 PM</td><td>Lunch</td><td>🍽️ Local</td><td><strong>Seagull</strong> - Beef <span class="star">⭐</span></td></tr>
+                            <tr><td class="time">4:00 PM</td><td>Fishing Nets</td><td>🚶‍♂️ 5min</td><td>Vasco da Gama Square</td></tr>
+                            <tr><td class="time">5:00 PM</td><td>Return</td><td>🚢 Ferry</td><td>Back to IMA House</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="contact-box">
+                        <h3>📞 Ferry Info</h3>
+                        <ul>
+                            <li><strong>Route:</strong> Ernakulam ↔ Fort Kochi</li>
+                            <li><strong>Frequency:</strong> Every 30 minutes</li>
+                            <li><strong>Hours:</strong> 6:00 AM - 9:30 PM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 4: DAY 1 EVENING -->
+            <div class="card">
+                <div class="card-number">4/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🎉 Day 1 Evening</h2>
+                    <p class="card-subtitle">Function & Rest</p>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">📝</span>Notes</th></tr>
+                            <tr class="highlight"><td class="time">6:00 PM</td><td><strong>Function Start</strong></td><td>🚗 Local cab</td><td>Pre-arranged</td></tr>
+                            <tr class="highlight"><td class="time">9:00 PM</td><td><strong>Function End</strong></td><td>🚗 Local cab</td><td>Return to hotel</td></tr>
+                            <tr><td class="time">10:00 PM</td><td>Rest</td><td>🛏️ Sleep</td><td>Big day tomorrow</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>💡 Evening Tips</h3>
+                        <ul>
+                            <li><strong>Cab:</strong> Pre-arranged transport</li>
+                            <li><strong>Location:</strong> Function venue ready</li>
+                            <li><strong>Rest:</strong> Early start tomorrow</li>
+                            <li><strong>Prep:</strong> Get Kochi1 Card for Water Metro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 5: DAY 2 HERITAGE -->
+            <div class="card">
+                <div class="card-number">5/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🌅 Day 2 Heritage</h2>
+                    <p class="card-subtitle">Fort Kochi Historic Sites</p>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">🏛️</span>Location</th></tr>
+                            <tr class="highlight"><td class="time">8:00 AM</td><td>To Fort Kochi</td><td>🚢 <strong>Water Metro</strong> <span class="star">⭐</span></td><td>Get Kochi1 Card</td></tr>
+                            <tr><td class="time">8:30 AM</td><td>Breakfast</td><td>🍽️ Local</td><td><strong>French Toast Cafe</strong></td></tr>
+                            <tr><td class="time">9:30 AM</td><td>Church</td><td>🚶‍♂️ 5min</td><td><strong>St. Francis</strong> - Oldest European</td></tr>
+                            <tr><td class="time">10:30 AM</td><td>Palace</td><td>🚶‍♂️ Auto</td><td><strong>Mattancherry</strong> - Portuguese</td></tr>
+                            <tr><td class="time">11:30 AM</td><td>Synagogue</td><td>🚶‍♂️ 2min</td><td><strong>Paradesi</strong> + Jew Town</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Heritage Timings</h3>
+                        <ul>
+                            <li><strong>St. Francis:</strong> 9:00 AM - 5:30 PM</li>
+                            <li><strong>Palace:</strong> 10:00 AM - 5:00 PM (Closed Fri)</li>
+                            <li><strong>Synagogue:</strong> 10:00 AM - 12:00 PM, 3:00 PM - 5:00 PM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 6: WATER METRO -->
+            <div class="card">
+                <div class="card-number">6/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🌊 Water Metro</h2>
+                    <p class="card-subtitle">India's First Water Metro System</p>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">✨</span>Highlight</th></tr>
+                            <tr><td class="time">12:30 PM</td><td>Waterfront Lunch</td><td>🍽️ Local</td><td><strong>Fort House</strong> - Scenic <span class="star">⭐</span></td></tr>
+                            <tr class="highlight"><td class="time">2:00 PM</td><td><strong>WATER METRO</strong></td><td>🚢 Electric boats <span class="star">⭐</span></td><td>India's first!</td></tr>
+                            <tr><td class="time">2:45 PM</td><td>Marine Drive</td><td>🚶‍♂️ Walk</td><td>3km promenade</td></tr>
+                            <tr><td class="time">4:00 PM</td><td>Ice Cream</td><td>🍦 Break</td><td><strong>Milano</strong> - Original</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>🚢 Water Metro Details</h3>
+                        <ul>
+                            <li><strong>Route:</strong> High Court ↔ Ernakulam South</li>
+                            <li><strong>Fleet:</strong> 75+ electric boats</li>
+                            <li><strong>Frequency:</strong> Every 15-20 minutes</li>
+                            <li><strong>Hours:</strong> 7:00 AM - 7:30 PM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-box">
+                        <h3>📱 Get Kochi1 Card</h3>
+                        <p><strong>Integrated payment</strong> for Metro, Water Metro, and buses. Available at all metro stations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 7: FINAL EVENING -->
+            <div class="card">
+                <div class="card-number">7/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🌆 Final Evening</h2>
+                    <p class="card-subtitle">Last Meal & Airport</p>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">✨</span>Final</th></tr>
+                            <tr><td class="time">5:30 PM</td><td>Return to Area</td><td>🚢 Ferry/Metro</td><td>Pack prep</td></tr>
+                            <tr class="highlight"><td class="time">6:00 PM</td><td><strong>FINAL DINNER</strong></td><td>🚶‍♂️ 1.2km</td><td><strong>Karthiyani</strong> - Winner <span class="star">⭐</span></td></tr>
+                            <tr><td class="time">8:00 PM</td><td>Pack & Checkout</td><td>🏨 IMA House</td><td>Final prep</td></tr>
+                            <tr><td class="time">9:30 PM</td><td>Evening Walk</td><td>🚶‍♂️ Walk</td><td>Marine Drive</td></tr>
+                            <tr class="highlight"><td class="time">11:00 PM</td><td><strong>TO AIRPORT</strong></td><td>🚗 Pre-booked</td><td>45-60 min</td></tr>
+                            <tr class="highlight"><td class="time">12:00 AM</td><td><strong>AIRPORT</strong></td><td>✈️ 2:00 AM</td><td><strong>Sep 2 departure</strong></td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Critical Final Timing</h3>
+                        <ul>
+                            <li><strong>Pre-book taxi</strong> for 11:00 PM</li>
+                            <li><strong>Airport:</strong> 35km (45-60 min)</li>
+                            <li><strong>Flight:</strong> 2:00 AM departure</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 8: RESTAURANTS -->
+            <div class="card">
+                <div class="card-number">8/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🍽️ Must-Try Food</h2>
+                    <p class="card-subtitle">Local Non-Veg Specialties</p>
+                </div>
+                <div class="card-content">
+                    <h3 style="color: #2c5aa0; margin-bottom: 10px;"><span class="star">⭐</span> Priority Restaurants</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🏪</span>Restaurant</th><th><span class="emoji">✨</span>Specialty</th><th><span class="emoji">📍</span>Location</th><th><span class="emoji">🕐</span>When</th></tr>
+                            <tr class="highlight"><td><strong>Seagull</strong></td><td><strong>Beef speciality</strong></td><td>Fort Kochi</td><td>Aug 31, 3 PM</td></tr>
+                            <tr class="highlight"><td><strong>Fort House</strong></td><td><strong>Waterfront dining</strong></td><td>Fort Kochi</td><td>Sep 1, 12:30 PM</td></tr>
+                            <tr class="highlight"><td><strong>Karthiyani</strong></td><td><strong>Golden Clove Winner</strong></td><td>1.2km walk</td><td>Sep 1, 6 PM</td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="color: #2c5aa0; margin: 15px 0 10px;">🍴 Supporting Meals</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🏪</span>Place</th><th><span class="emoji">🍽️</span>Type</th><th><span class="emoji">📍</span>Distance</th><th><span class="emoji">🕐</span>When</th></tr>
+                            <tr><td><strong>Grand Restaurant</strong></td><td>Historic</td><td>0.5km walk</td><td>Aug 31 brunch</td></tr>
+                            <tr><td><strong>French Toast</strong></td><td>Breakfast</td><td>Fort Kochi</td><td>Sep 1 morning</td></tr>
+                            <tr><td><strong>Milano Ice Cream</strong></td><td>Dessert</td><td>0.8km walk</td><td>Sep 1 afternoon</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 9: TRANSPORT -->
+            <div class="card">
+                <div class="card-number">9/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">🚗🚢 Transport</h2>
+                    <p class="card-subtitle">All Transport Options</p>
+                </div>
+                <div class="card-content">
+                    <h3 style="color: #2c5aa0; margin-bottom: 10px;">🎫 Essential Cards</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🎫</span>Service</th><th><span class="emoji">🎯</span>Purpose</th><th><span class="emoji">📍</span>Where</th></tr>
+                            <tr class="highlight"><td><strong>Kochi1 Card</strong></td><td>Metro + Water Metro + Bus</td><td>Any Metro station</td></tr>
+                            <tr><td><strong>Uber/Ola</strong></td><td>Airport transfer</td><td>Mobile app</td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="color: #2c5aa0; margin: 15px 0 10px;">🚢 Water Transport</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🚢</span>Service</th><th><span class="emoji">📍</span>Route</th><th><span class="emoji">🕐</span>Hours</th><th><span class="emoji">⏱️</span>Frequency</th></tr>
+                            <tr class="highlight"><td><strong>Water Metro</strong> <span class="star">⭐</span></td><td>High Court ↔ Fort Kochi</td><td>7 AM - 7:30 PM</td><td>15-20 min</td></tr>
+                            <tr><td><strong>Ferry</strong></td><td>Ernakulam ↔ Fort Kochi</td><td>6 AM - 9:30 PM</td><td>30 min</td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="color: #2c5aa0; margin: 15px 0 10px;">🚗 Road Transport</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🛣️</span>Journey</th><th><span class="emoji">📏</span>Distance</th><th><span class="emoji">⏱️</span>Time</th></tr>
+                            <tr><td>Thiruvananthapuram → Kochi</td><td>220km</td><td>5-6 hrs</td></tr>
+                            <tr class="highlight"><td>IMA House → Airport</td><td>35km</td><td>45-60 min</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 10: CONTACTS -->
+            <div class="card">
+                <div class="card-number">10/12</div>
+                <div class="card-header">
+                    <h2 class="card-title">📞 Emergency Contacts</h2>
+                    <p class="card-subtitle">Important Numbers</p>
+                </div>
+                <div class="card-content">
+                    <h3 style="color: #2c5aa0; margin-bottom: 10px;">🏛️ Attractions</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🏛️</span>Service</th><th><span class="emoji">📞</span>Contact</th><th><span class="emoji">🎯</span>Purpose</th></tr>
+                            <tr><td><strong>Heritage Walk</strong></td><td>Binny Johann<br>+91 70421 49051</td><td>Book tour</td></tr>
+                            <tr><td><strong>Kathakali Centre</strong></td><td>+91 484 221 5827</td><td>Performances</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="contact-box">
+                        <h3>🚨 Emergency Services</h3>
+                        <ul>
+                            <li><strong>Police:</strong> 100</li>
+                            <li><strong>Fire:</strong> 101</li>
+                            <li><strong>Ambulance:</strong> 108</li>
+                            <li><strong>Tourist Helpline:</strong> 1363</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>📱 Useful Apps</h3>
+                        <ul>
+                            <li><strong>Uber/Ola:</strong> Taxi bookings</li>
+                            <li><strong>Google Maps:</strong> Navigation</li>
+                            <li><strong>Kochi1 App:</strong> Public transport</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 11: REMINDERS -->
+            <div class="card">
+                <div class="card-number">11/12</div>
+                <div class="card-header" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);">
+                    <h2 class="card-title">⚠️ Critical Reminders</h2>
+                    <p class="card-subtitle">Key Timings & Must-Dos</p>
+                </div>
+                <div class="card-content">
+                    <div class="warning-box">
+                        <h3>🕐 Key Timings</h3>
+                        <ul>
+                            <li><strong>Water Metro last:</strong> 7:30 PM</li>
+                            <li><strong>Ferry last:</strong> 9:30 PM</li>
+                            <li><strong>Airport departure:</strong> 11:00 PM (Sep 1)</li>
+                            <li><strong>Flight:</strong> 2:00 AM (Sep 2)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>🎯 Must-Do Experiences</h3>
+                        <ol>
+                            <li>✅ <strong>Water Metro journey</strong></li>
+                            <li>✅ <strong>Fish curry at Karthiyani</strong></li>
+                            <li>✅ <strong>Beef at Seagull</strong></li>
+                            <li>✅ <strong>Chinese Fishing Nets</strong></li>
+                            <li>✅ <strong>Marine Drive walk</strong></li>
+                            <li>✅ <strong>Heritage sites</strong></li>
+                        </ol>
+                    </div>
+                    
+                    <div class="contact-box">
+                        <h3>💡 Pro Tips</h3>
+                        <ul>
+                            <li>Get <strong>Kochi1 Card</strong> immediately</li>
+                            <li><strong>Pre-book airport taxi</strong></li>
+                            <li>Keep <strong>ferry timings</strong> handy</li>
+                            <li><strong>Confirm restaurant availability</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CARD 12: BACKUP PLANS -->
+            <div class="card">
+                <div class="card-number">12/12</div>
+                <div class="card-header" style="background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);">
+                    <h2 class="card-title">🛡️ Backup Plans</h2>
+                    <p class="card-subtitle">Weather & Contingencies</p>
+                </div>
+                <div class="card-content">
+                    <h3 style="color: #2c5aa0; margin-bottom: 10px;">🌧️ Weather Alternatives</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">🌧️</span>If Raining</th><th><span class="emoji">☀️</span>Indoor Option</th><th><span class="emoji">📍</span>Hours</th></tr>
+                            <tr><td>Marine Drive</td><td>Lulu Mall Shopping</td><td>10 AM - 11 PM</td></tr>
+                            <tr><td>Fishing Nets</td><td>Maritime Museum</td><td>10 AM - 5 PM</td></tr>
+                            <tr><td>Heritage Walk</td><td>David Hall Gallery</td><td>10 AM - 7 PM</td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="color: #2c5aa0; margin: 15px 0 10px;">🚢 Transport Backup</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr><th><span class="emoji">⚠️</span>Primary</th><th><span class="emoji">🔄</span>Backup</th><th><span class="emoji">💰</span>Notes</th></tr>
+                            <tr><td>Water Metro</td><td>Traditional Ferry</td><td>Similar cost</td></tr>
+                            <tr><td>Ferry</td><td>Uber/Auto</td><td>Higher cost</td></tr>
+                            <tr><td>Airport Taxi</td><td>Airport Bus</td><td>Lower cost</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>🚨 Emergency Scenarios</h3>
+                        <ul>
+                            <li><strong>Flight Delay:</strong> Hotels near airport available</li>
+                            <li><strong>Transport Strike:</strong> Pre-book private taxi</li>
+                            <li><strong>Restaurant Closed:</strong> Multiple backups listed</li>
+                            <li><strong>Bad Weather:</strong> Indoor activities ready</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px; padding: 15px; background: #f0f8ff; border-radius: 8px;">
+                        <h3 style="color: #2c5aa0; margin-bottom: 10px;">🎉 Have an Amazing Trip!</h3>
+                        <p style="color: #666; margin: 0;">Safe travels and enjoy your Kochi adventure! 🌴✈️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="changeCard(-1)" disabled>
+                <span>←</span> Previous
+            </button>
+            
+            <div class="card-indicator">
+                <span id="cardCounter">1 / 12</span>
+                <div class="dots-container" id="dotsContainer">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <button class="nav-button" id="nextBtn" onclick="changeCard(1)">
+                Next <span>→</span>
+            </button>
+        </nav>
+    </div>
+    
+    <script>
+        let currentCard = 0;
+        const totalCards = 12;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateDots();
+            updateCard();
+            
+            // Add swipe gestures
+            let startX = 0;
+            let startY = 0;
+            const container = document.getElementById('cardsContainer');
+            
+            container.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            container.addEventListener('touchmove', function(e) {
+                if (Math.abs(e.touches[0].clientY - startY) > 50) {
+                    return; // Vertical scroll
+                }
+                e.preventDefault();
+            }, { passive: false });
+            
+            container.addEventListener('touchend', function(e) {
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                const diffX = startX - endX;
+                const diffY = startY - endY;
+                
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        changeCard(1); // Swipe left - next card
+                    } else {
+                        changeCard(-1); // Swipe right - previous card
+                    }
+                }
+            }, { passive: true });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') changeCard(-1);
+                if (e.key === 'ArrowRight') changeCard(1);
+            });
+        });
+        
+        function generateDots() {
+            const container = document.getElementById('dotsContainer');
+            for (let i = 0; i < totalCards; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToCard(i));
+                container.appendChild(dot);
+            }
+        }
+        
+        function changeCard(direction) {
+            const newCard = currentCard + direction;
+            if (newCard >= 0 && newCard < totalCards) {
+                currentCard = newCard;
+                updateCard();
+            }
+        }
+        
+        function goToCard(cardIndex) {
+            currentCard = cardIndex;
+            updateCard();
+        }
+        
+        function updateCard() {
+            // Hide all cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.classList.remove('visible', 'active');
+                if (index === currentCard) {
+                    card.classList.add('visible', 'active');
+                    // Smooth scroll to top
+                    setTimeout(() => {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            });
+            
+            // Update navigation
+            document.getElementById('prevBtn').disabled = currentCard === 0;
+            document.getElementById('nextBtn').disabled = currentCard === totalCards - 1;
+            
+            // Update counter
+            document.getElementById('cardCounter').textContent = `${currentCard + 1} / ${totalCards}`;
+            
+            // Update progress bar
+            const progressFill = document.getElementById('progressFill');
+            const progress = ((currentCard + 1) / totalCards) * 100;
+            progressFill.style.width = `${progress}%`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentCard);
+            });
+            
+            // Haptic feedback on mobile
+            if ('vibrate' in navigator) {
+                navigator.vibrate(10);
+            }
+        }
+        
+        // Service worker registration for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('SW registered: ', registration);
+                }).catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                });
+            });
+        }
+        
+        // Add to home screen prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show custom install button (optional)
+            const installBtn = document.createElement('button');
+            installBtn.textContent = '📱 Add to Home Screen';
+            installBtn.className = 'nav-button';
+            installBtn.style.cssText = 'position: fixed; top: 120px; right: 20px; z-index: 1001; font-size: 12px; padding: 8px 12px;';
+            installBtn.onclick = () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                    installBtn.remove();
+                });
+            };
+            document.body.appendChild(installBtn);
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                if (installBtn.parentNode) {
+                    installBtn.remove();
+                }
+            }, 10000);
+        });
+    </script>
+</body>
+</html>
