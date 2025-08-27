@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kochi Travel Cards</title>
+    <style>
+        @media print {
+            .card {
+                page-break-before: always;
+                page-break-inside: avoid;
+            }
+            .card:first-child {
+                page-break-before: auto;
+            }
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+        }
+        
+        .card {
+            width: 210mm;
+            min-height: 297mm;
+            max-height: 297mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+        
+        .card-content {
+            flex: 1;
+        }
+        
+        table { 
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 12px;
+            font-weight: 600;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) td {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover td {
+            background-color: #e3f2fd;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%) !important;
+            font-weight: bold;
+            color: #8b4513;
+        }
+        
+        .star {
+            color: #ff6b35;
+            font-size: 16px;
+        }
+        
+        .emoji {
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        
+        .time {
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #51cf66;
+        }
+        
+        .contact-box {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #9775fa;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .card-footer {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 20px;
+            color: #6c757d;
+            font-size: 12px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        h3 {
+            color: #2c5aa0;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+
+<!-- CARD 1: COVER PAGE -->
+<div class="card">
+    <div class="card-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+        <h1 class="card-title">🏛️ KOCHI TRAVEL CARDS</h1>
+        <p class="card-subtitle">Complete Flash Card Guide | Aug 31 - Sep 1, 2025</p>
+    </div>
+    <div class="card-content">
+        <div style="text-align: center; padding: 40px 0;">
+            <h2 style="color: #667eea; margin-bottom: 30px;">📍 Quick Overview</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #28a745; border: none;">🌅 Day 1: Aug 31</h3>
+                    <p>Drive from Thiruvananthapuram<br>
+                    Arrival & Function</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #dc3545; border: none;">🏛️ Day 2: Sep 1</h3>
+                    <p>Full Kochi Exploration<br>
+                    Red-eye Flight 2:00 AM</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h3 style="border: none; color: #2c5aa0;">🎯 Trip Highlights</h3>
+                <ul style="text-align: left; font-size: 16px;">
+                    <li><strong>Water Metro Experience</strong> - India's first!</li>
+                    <li><strong>Authentic Kerala Cuisine</strong> - Fish curry & beef specialities</li>
+                    <li><strong>Heritage Sites</strong> - Churches, Palace, Synagogue</li>
+                    <li><strong>Chinese Fishing Nets</strong> - Iconic 14th century nets</li>
+                    <li><strong>Marine Drive</strong> - 3km waterfront walks</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h3 style="border: none; color: #721c24;">⚠️ Critical Timing</h3>
+                <p style="font-size: 18px; margin: 0;"><strong>Airport Departure: 11:00 PM (Sep 1)<br>
+                Flight: 2:00 AM (Sep 2)</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        Generated for Kochi Trip 2025 🌴
+    </div>
+</div>
+
+<!-- CARD 2: DAY 1 MORNING -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🌅 DAY 1: AUG 31 - MORNING JOURNEY</h2>
+        <p class="card-subtitle">Thiruvananthapuram to Kochi</p>
+    </div>
+    <div class="card-content">
+        <table>
+            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">📝</span>Notes</th></tr>
+            <tr><td class="time">5:00 AM</td><td>Depart Thiruvananthapuram</td><td>🚗 Drive</td><td>220km, NH66/NH544</td></tr>
+            <tr><td class="time">7:30 AM</td><td>Breakfast Break</td><td>🛑 Stop</td><td>Kollam</td></tr>
+            <tr><td class="time">9:30 AM</td><td>Rest Stop</td><td>🛑 Stop</td><td>Alappuzha</td></tr>
+            <tr class="highlight"><td class="time">10:30 AM</td><td><strong>Arrive IMA House, Cochin</strong></td><td>🏨 Check-in</td><td>Freshen up</td></tr>
+        </table>
+        
+        <div class="tip-box">
+            <h3>🛣️ Route Details</h3>
+            <ul>
+                <li><strong>Total Distance:</strong> 220 kilometers</li>
+                <li><strong>Expected Duration:</strong> 5-6 hours</li>
+                <li><strong>Route:</strong> NH66 → NH544</li>
+                <li><strong>Traffic:</strong> Expect heavier traffic near Kochi</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 2 of 12 | Day 1 Morning
+    </div>
+</div>
+
+<!-- CARD 3: DAY 1 AFTERNOON -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🍽️ DAY 1: AUG 31 - AFTERNOON</h2>
+        <p class="card-subtitle">First Taste of Kochi</p>
+    </div>
+    <div class="card-content">
+        <table>
+            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">🍽️</span>Restaurant</th></tr>
+            <tr><td class="time">11:30 AM</td><td>Brunch</td><td>🚶‍♂️ Walk 0.5km</td><td><strong>Grand Restaurant</strong> - Historic</td></tr>
+            <tr><td class="time">1:00 PM</td><td>Marine Drive Walk</td><td>🚶‍♂️ Walk</td><td>3km waterfront</td></tr>
+            <tr><td class="time">2:30 PM</td><td>Travel to Fort Kochi</td><td>🚢 Ferry 30min</td><td>Traditional ferry</td></tr>
+            <tr class="highlight"><td class="time">3:00 PM</td><td>Lunch</td><td>🍽️ Local</td><td><strong>Seagull</strong> - Beef speciality <span class="star">⭐</span></td></tr>
+            <tr><td class="time">4:00 PM</td><td>Chinese Fishing Nets</td><td>🚶‍♂️ Walk 5min</td><td>Vasco da Gama Square</td></tr>
+            <tr><td class="time">5:00 PM</td><td>Return to IMA House</td><td>🚢 Ferry 30min</td><td>Prepare for function</td></tr>
+        </table>
+        
+        <div class="contact-box">
+            <h3>📞 Ferry Information</h3>
+            <ul>
+                <li><strong>Route:</strong> Ernakulam Jetty ↔ Fort Kochi</li>
+                <li><strong>Frequency:</strong> Every 30 minutes</li>
+                <li><strong>Duration:</strong> 30 minutes</li>
+                <li><strong>Operating Hours:</strong> 6:00 AM - 9:30 PM</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 3 of 12 | Day 1 Afternoon
+    </div>
+</div>
+
+<!-- CARD 4: DAY 1 EVENING -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🎉 DAY 1: AUG 31 - EVENING</h2>
+        <p class="card-subtitle">Function & Rest</p>
+    </div>
+    <div class="card-content">
+        <table>
+            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">📝</span>Notes</th></tr>
+            <tr class="highlight"><td class="time">6:00 PM</td><td><strong>Function Start</strong></td><td>🚗 Local cab</td><td>Arranged transport</td></tr>
+            <tr class="highlight"><td class="time">9:00 PM</td><td><strong>Function End</strong></td><td>🚗 Local cab</td><td>Return to IMA House</td></tr>
+            <tr><td class="time">10:00 PM</td><td>Rest</td><td>🛏️ Sleep</td><td>Early day tomorrow</td></tr>
+        </table>
+        
+        <div class="tip-box">
+            <h3>💡 Evening Tips</h3>
+            <ul>
+                <li><strong>Local Cab:</strong> Pre-arranged transport as mentioned</li>
+                <li><strong>Function Location:</strong> (10.118336, 76.441894)</li>
+                <li><strong>Rest Well:</strong> Tomorrow is full exploration day</li>
+                <li><strong>Prepare:</strong> Get Kochi1 Card ready for Water Metro</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <h2 style="color: #667eea;">🌙 End of Day 1</h2>
+            <p style="font-size: 18px; color: #6c757d;">Get ready for the ultimate Kochi experience tomorrow!</p>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 4 of 12 | Day 1 Evening
+    </div>
+</div>
+
+<!-- CARD 5: DAY 2 MORNING HERITAGE -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🌅 DAY 2: SEP 1 - FORT KOCHI HERITAGE</h2>
+        <p class="card-subtitle">Historic Churches & Palaces</p>
+    </div>
+    <div class="card-content">
+        <table>
+            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">🏛️</span>Location</th></tr>
+            <tr class="highlight"><td class="time">8:00 AM</td><td>Travel to Fort Kochi</td><td>🚢 <strong>Water Metro</strong> <span class="star">⭐</span></td><td>Get Kochi1 Card</td></tr>
+            <tr><td class="time">8:30 AM</td><td>Breakfast</td><td>🍽️ Local</td><td><strong>French Toast Cafe</strong> - Best pancakes</td></tr>
+            <tr><td class="time">9:30 AM</td><td>Historic Church</td><td>🚶‍♂️ Walk 5min</td><td><strong>St. Francis Church</strong> - Oldest European</td></tr>
+            <tr><td class="time">10:30 AM</td><td>Royal Palace</td><td>🚶‍♂️ Auto 15min</td><td><strong>Mattancherry Palace</strong> - Portuguese</td></tr>
+            <tr><td class="time">11:30 AM</td><td>Jewish Heritage</td><td>🚶‍♂️ Walk 2min</td><td><strong>Paradesi Synagogue</strong> + Jew Town</td></tr>
+        </table>
+        
+        <div class="warning-box">
+            <h3>⚠️ Heritage Site Timings</h3>
+            <ul>
+                <li><strong>St. Francis Church:</strong> 9:00 AM - 5:30 PM</li>
+                <li><strong>Mattancherry Palace:</strong> 10:00 AM - 5:00 PM (Closed Fridays)</li>
+                <li><strong>Paradesi Synagogue:</strong> 10:00 AM - 12:00 PM, 3:00 PM - 5:00 PM (Closed Fri & Sat)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 5 of 12 | Day 2 Morning Heritage
+    </div>
+</div>
+
+<!-- CARD 6: DAY 2 WATER METRO EXPERIENCE -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🌊 DAY 2: SEP 1 - WATER METRO</h2>
+        <p class="card-subtitle">India's First Water Metro System</p>
+    </div>
+    <div class="card-content">
+        <table>
+            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">✨</span>Highlight</th></tr>
+            <tr><td class="time">12:30 PM</td><td>Waterfront Lunch</td><td>🍽️ Local</td><td><strong>Fort House Restaurant</strong> - Scenic <span class="star">⭐</span></td></tr>
+            <tr class="highlight"><td class="time">2:00 PM</td><td><strong>WATER METRO JOURNEY</strong></td><td>🚢 <strong>Electric boats</strong> <span class="star">⭐</span></td><td>India's first water metro</td></tr>
+            <tr><td class="time">2:45 PM</td><td>Marine Drive Walk</td><td>🚶‍♂️ Walk</td><td>3km waterfront promenade</td></tr>
+            <tr><td class="time">4:00 PM</td><td>Ice Cream Break</td><td>🍦 Dessert</td><td><strong>Milano Ice Cream</strong> - Original outlet</td></tr>
+        </table>
+        
+        <div class="tip-box">
+            <h3>🚢 Water Metro Details</h3>
+            <ul>
+                <li><strong>Route:</strong> High Court ↔ Ernakulam South</li>
+                <li><strong>Fleet:</strong> 75+ electric boats</li>
+                <li><strong>Frequency:</strong> Every 15-20 minutes</li>
+                <li><strong>Operating Hours:</strong> 7:00 AM - 7:30 PM</li>
+                <li><strong>Experience:</strong> Eco-friendly, scenic waterway travel</li>
+            </ul>
+        </div>
+        
+        <div class="contact-box">
+            <h3>📱 Essential Card</h3>
+            <p style="font-size: 16px;"><strong>Kochi1 Card:</strong> Integrated payment for Metro, Water Metro, and buses. Available at all metro stations and major terminals.</p>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 6 of 12 | Day 2 Water Metro Experience
+    </div>
+</div>
+
+<!-- CARD 7: DAY 2 EVENING & DEPARTURE -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🌆 DAY 2: SEP 1 - FINAL EVENING</h2>
+        <p class="card-subtitle">Last Meal & Airport Departure</p>
+    </div>
+    <div class="card-content">
+        <table>
+            <tr><th><span class="emoji">🕐</span>Time</th><th><span class="emoji">📍</span>Activity</th><th><span class="emoji">🚗</span>Transport</th><th><span class="emoji">✨</span>Final Experience</th></tr>
+            <tr><td class="time">5:30 PM</td><td>Return to IMA House Area</td><td>🚢 Ferry/Water Metro</td><td>Pack preparation</td></tr>
+            <tr class="highlight"><td class="time">6:00 PM</td><td><strong>FINAL DINNER</strong></td><td>🚶‍♂️ Walk 1.2km</td><td><strong>Karthiyani</strong> - Golden Clove Winner <span class="star">⭐</span></td></tr>
+            <tr><td class="time">8:00 PM</td><td>Pack & Check Out</td><td>🏨 IMA House</td><td>Final preparations</td></tr>
+            <tr><td class="time">9:30 PM</td><td>Evening Activity</td><td>🚶‍♂️ Walk</td><td>Marine Drive OR Heritage Walk</td></tr>
+            <tr class="highlight"><td class="time">11:00 PM</td><td><strong>DEPART FOR AIRPORT</strong></td><td>🚗 Pre-booked taxi</td><td>45-60 min journey</td></tr>
+            <tr class="highlight"><td class="time">12:00 AM</td><td><strong>ARRIVE AIRPORT</strong></td><td>✈️ Flight 2:00 AM</td><td><strong>Sep 2nd departure</strong></td></tr>
+        </table>
+        
+        <div class="warning-box">
+            <h3>⚠️ Critical Final Timing</h3>
+            <ul>
+                <li><strong>Pre-book taxi:</strong> Confirm 11:00 PM pickup</li>
+                <li><strong>Airport distance:</strong> 35km (45-60 min journey)</li>
+                <li><strong>Flight departure:</strong> 2:00 AM (Sep 2)</li>
+                <li><strong>Check-in time:</strong> Arrive by 12:00 AM</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 7 of 12 | Day 2 Evening & Departure
+    </div>
+</div>
+
+<!-- CARD 8: MUST-TRY RESTAURANTS -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🍽️ MUST-TRY RESTAURANTS</h2>
+        <p class="card-subtitle">Local Non-Vegetarian Specialties</p>
+    </div>
+    <div class="card-content">
+        <h3><span class="star">⭐</span> Priority Non-Veg Restaurants</h3>
+        <table>
+            <tr><th><span class="emoji">🏪</span>Restaurant</th><th><span class="emoji">🍽️</span>Cuisine</th><th><span class="emoji">✨</span>Specialty</th><th><span class="emoji">📍</span>Distance from IMA</th><th><span class="emoji">🕐</span>When</th></tr>
+            <tr class="highlight"><td><strong>Seagull</strong></td><td>Seafood</td><td><strong>Beef speciality</strong></td><td>Fort Kochi (Ferry)</td><td>Aug 31, 3:00 PM</td></tr>
+            <tr class="highlight"><td><strong>Fort House</strong></td><td>Mixed</td><td><strong>Waterfront dining</strong></td><td>Fort Kochi (Ferry)</td><td>Sep 1, 12:30 PM</td></tr>
+            <tr class="highlight"><td><strong>Karthiyani</strong></td><td>Fish Curry</td><td><strong>Golden Clove Winner 2025</strong></td><td>1.2km walk</td><td>Sep 1, 6:00 PM</td></tr>
+        </table>
+        
+        <h3>🍴 Supporting Meals</h3>
+        <table>
+            <tr><th><span class="emoji">🏪</span>Restaurant</th><th><span class="emoji">🍽️</span>Type</th><th><span class="emoji">✨</span>Specialty</th><th><span class="emoji">📍</span>Location</th><th><span class="emoji">🕐</span>When</th></tr>
+            <tr><td><strong>Grand Restaurant</strong></td><td>Historic</td><td>Institution quality</td><td>0.5km walk</td><td>Aug 31 brunch</td></tr>
+            <tr><td><strong>French Toast Cafe</strong></td><td>Breakfast</td><td>Best pancakes & eggs</td><td>Fort Kochi</td><td>Sep 1 breakfast</td></tr>
+            <tr><td><strong>Milano Ice Cream</strong></td><td>Dessert</td><td>Original outlet</td><td>0.8km walk</td><td>Sep 1 afternoon</td></tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        Card 8 of 12 | Must-Try Restaurants
+    </div>
+</div>
+
+<!-- CARD 9: TRANSPORT CARDS -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🚗🚢 TRANSPORT GUIDE</h2>
+        <p class="card-subtitle">All Transport Options</p>
+    </div>
+    <div class="card-content">
+        <h3>🎫 Essential Cards & Apps</h3>
+        <table>
+            <tr><th><span class="emoji">🎫</span>Service</th><th><span class="emoji">🎯</span>Purpose</th><th><span class="emoji">📍</span>Where to Get</th></tr>
+            <tr class="highlight"><td><strong>Kochi1 Card</strong></td><td>Metro + Water Metro + Bus</td><td>Any Metro station</td></tr>
+            <tr><td><strong>Uber/Ola</strong></td><td>Airport transfer</td><td>Mobile app</td></tr>
+        </table>
+        
+        <h3>🚢 Water Transport</h3>
+        <table>
+            <tr><th><span class="emoji">🚢</span>Service</th><th><span class="emoji">📍</span>Route</th><th><span class="emoji">🕐</span>Timings</th><th><span class="emoji">⏱️</span>Frequency</th></tr>
+            <tr class="highlight"><td><strong>Water Metro</strong> <span class="star">⭐</span></td><td>High Court ↔ Fort Kochi</td><td>7:00 AM - 7:30 PM</td><td>Every 15-20 min</td></tr>
+            <tr><td><strong>Traditional Ferry</strong></td><td>Ernakulam Jetty ↔ Fort Kochi</td><td>6:00 AM - 9:30 PM</td><td>Every 30 min</td></tr>
+        </table>
+        
+        <h3>🚗 Road Transport</h3>
+        <table>
+            <tr><th><span class="emoji">🛣️</span>Journey</th><th><span class="emoji">📏</span>Distance</th><th><span class="emoji">⏱️</span>Time</th><th><span class="emoji">📝</span>Notes</th></tr>
+            <tr><td>Thiruvananthapuram → Kochi</td><td>220km</td><td>5-6 hours</td><td>NH66/NH544</td></tr>
+            <tr class="highlight"><td>IMA House → Airport</td><td>35km</td><td>45-60 min</td><td><strong>Pre-book taxi</strong></td></tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        Card 9 of 12 | Transport Guide
+    </div>
+</div>
+
+<!-- CARD 10: EMERGENCY CONTACTS -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">📞 EMERGENCY CONTACTS</h2>
+        <p class="card-subtitle">Important Phone Numbers & Services</p>
+    </div>
+    <div class="card-content">
+        <h3>🏛️ Attractions & Experiences</h3>
+        <table>
+            <tr><th><span class="emoji">🏛️</span>Service</th><th><span class="emoji">📞</span>Contact</th><th><span class="emoji">🎯</span>Purpose</th></tr>
+            <tr><td><strong>Heritage Walk</strong></td><td>Binny Johann: +91 70421 49051</td><td>Book guided tour</td></tr>
+            <tr><td><strong>Kathakali Centre</strong></td><td>+91 484 221 5827</td><td>Traditional performances</td></tr>
+        </table>
+        
+        <h3>🏨 Accommodation</h3>
+        <table>
+            <tr><th><span class="emoji">🏨</span>Property</th><th><span class="emoji">📍</span>Type</th><th><span class="emoji">📞</span>Contact</th></tr>
+            <tr class="highlight"><td><strong>IMA House, Cochin</strong></td><td>Stay location</td><td>Your booking reference</td></tr>
+        </table>
+        
+        <div class="contact-box">
+            <h3>🚨 Emergency Services</h3>
+            <ul>
+                <li><strong>Police:</strong> 100</li>
+                <li><strong>Fire:</strong> 101</li>
+                <li><strong>Ambulance:</strong> 108</li>
+                <li><strong>Tourist Helpline:</strong> 1363</li>
+            </ul>
+        </div>
+        
+        <div class="tip-box">
+            <h3>📱 Useful Apps</h3>
+            <ul>
+                <li><strong>Uber/Ola:</strong> Taxi bookings</li>
+                <li><strong>Google Maps:</strong> Navigation</li>
+                <li><strong>KTDC App:</strong> Kerala tourism info</li>
+                <li><strong>Kochi1 App:</strong> Public transport</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 10 of 12 | Emergency Contacts
+    </div>
+</div>
+
+<!-- CARD 11: CRITICAL REMINDERS -->
+<div class="card">
+    <div class="card-header" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);">
+        <h2 class="card-title">⚠️ CRITICAL REMINDERS</h2>
+        <p class="card-subtitle">Important Timing & Safety Information</p>
+    </div>
+    <div class="card-content">
+        <div class="warning-box">
+            <h3>🕐 Key Timings</h3>
+            <ul style="font-size: 16px;">
+                <li><strong>Water Metro last service:</strong> 7:30 PM</li>
+                <li><strong>Traditional Ferry last service:</strong> 9:30 PM</li>
+                <li><strong>Airport departure:</strong> 11:00 PM (Sep 1)</li>
+                <li><strong>Airport arrival:</strong> 12:00 AM (Sep 2)</li>
+                <li><strong>Flight departure:</strong> 2:00 AM (Sep 2)</li>
+            </ul>
+        </div>
+        
+        <div class="tip-box">
+            <h3>🎯 Must-Do Experiences</h3>
+            <ol style="font-size: 16px;">
+                <li>✅ <strong>Water Metro journey</strong> (India's first!)</li>
+                <li>✅ <strong>Authentic fish curry</strong> at Karthiyani</li>
+                <li>✅ <strong>Beef speciality</strong> at Seagull</li>
+                <li>✅ <strong>Chinese Fishing Nets</strong> photo</li>
+                <li>✅ <strong>Marine Drive</strong> sunset walk</li>
+                <li>✅ <strong>Heritage sites</strong> - Churches, Palace, Synagogue</li>
+            </ol>
+        </div>
+        
+        <div class="contact-box">
+            <h3>💡 Pro Tips</h3>
+            <ul style="font-size: 16px;">
+                <li>Get <strong>Kochi1 Card</strong> immediately for seamless transport</li>
+                <li><strong>Pre-book airport taxi</strong> for 11:00 PM pickup</li>
+                <li>Keep <strong>ferry timings</strong> handy for Fort Kochi travel</li>
+                <li><strong>Confirm restaurant availability</strong> especially for 6:00 PM dinner at Karthiyani</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 11 of 12 | Critical Reminders
+    </div>
+</div>
+
+<!-- CARD 12: BACKUP PLAN -->
+<div class="card">
+    <div class="card-header" style="background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);">
+        <h2 class="card-title">🛡️ BACKUP PLANS</h2>
+        <p class="card-subtitle">Alternative Options & Weather Contingency</p>
+    </div>
+    <div class="card-content">
+        <h3>🌧️ Weather Alternatives</h3>
+        <table>
+            <tr><th><span class="emoji">🌧️</span>If Raining</th><th><span class="emoji">☀️</span>Indoor Alternative</th><th><span class="emoji">📍</span>Location</th></tr>
+            <tr><td>Marine Drive Walk</td><td>Lulu Mall Shopping</td><td>10:00 AM - 11:00 PM</td></tr>
+            <tr><td>Chinese Fishing Nets</td><td>Maritime Museum</td><td>Fort Kochi, 10:00 AM - 5:00 PM</td></tr>
+            <tr><td>Heritage Walk</td><td>David Hall Art Gallery</td><td>Fort Kochi, 10:00 AM - 7:00 PM</td></tr>
+        </table>
+        
+        <h3>🚢 Transport Backup</h3>
+        <table>
+            <tr><th><span class="emoji">⚠️</span>Primary Option</th><th><span class="emoji">🔄</span>Backup Option</th><th><span class="emoji">💰</span>Cost Difference</th></tr>
+            <tr><td>Water Metro</td><td>Traditional Ferry</td><td>Similar pricing</td></tr>
+            <tr><td>Ferry Service</td><td>Uber/Auto via road</td><td>Higher cost, longer time</td></tr>
+            <tr><td>Airport Taxi</td><td>Airport Express Bus</td><td>Lower cost, may take longer</td></tr>
+        </table>
+        
+        <h3>🍽️ Restaurant Backup</h3>
+        <table>
+            <tr><th><span class="emoji">⭐</span>Primary Choice</th><th><span class="emoji">🔄</span>Backup Option</th><th><span class="emoji">📍</span>Location</th></tr>
+            <tr><td>Karthiyani (6 PM)</td><td>Arippa Kerala Cuisine</td><td>0.8km from IMA House</td></tr>
+            <tr><td>Seagull (Fort Kochi)</td><td>Oceanos (Fort Kochi)</td><td>Spicy fish curry specialist</td></tr>
+            <tr><td>Fort House Restaurant</td><td>Malabar Junction</td><td>Portuguese courtyard setting</td></tr>
+        </table>
+        
+        <div class="tip-box">
+            <h3>🚨 Emergency Scenarios</h3>
+            <ul>
+                <li><strong>Flight Delay:</strong> Stay near airport, hotels available</li>
+                <li><strong>Transport Strike:</strong> Pre-book private taxi for airport</li>
+                <li><strong>Restaurant Closed:</strong> Multiple backup options listed</li>
+                <li><strong>Weather Issues:</strong> Indoor activities prioritized</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        Card 12 of 12 | Backup Plans ✅
+    </div>
+</div>
+
+</body>
+</html>
