@@ -330,6 +330,290 @@
             color: #666;
         }
         
+        /* Interests Grid Layout */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .interest-card {
+            position: relative;
+            aspect-ratio: 1;
+        }
+        
+        .interest-card input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .interest-card label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .interest-card:hover label {
+            border-color: var(--primary-blue);
+            background: #f8f9fa;
+        }
+        
+        .interest-card input:checked + label {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .interest-icon {
+            font-size: 1.5em;
+            margin-bottom: 4px;
+        }
+        
+        .interest-text {
+            font-size: 0.8em;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .interest-card input:checked + label .interest-text {
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            .interests-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .interest-icon {
+                font-size: 1.3em;
+            }
+            
+            .interest-text {
+                font-size: 0.75em;
+            }
+        }
+        
+        /* Duration Grid Layout */
+        .duration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .duration-card {
+            position: relative;
+            aspect-ratio: 1;
+        }
+        
+        .duration-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .duration-card label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .duration-card:hover label {
+            border-color: var(--primary-blue);
+            background: #f8f9fa;
+        }
+        
+        .duration-card input:checked + label {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .duration-icon {
+            font-size: 1.5em;
+            margin-bottom: 2px;
+        }
+        
+        .duration-text {
+            font-size: 0.85em;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .duration-desc {
+            font-size: 0.7em;
+            opacity: 0.8;
+            line-height: 1;
+        }
+        
+        /* Diet Grid Layout */
+        .diet-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .diet-card {
+            position: relative;
+            aspect-ratio: 1;
+        }
+        
+        .diet-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .diet-card label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .diet-card:hover label {
+            border-color: var(--primary-blue);
+            background: #f8f9fa;
+        }
+        
+        .diet-card input:checked + label {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .diet-icon {
+            font-size: 1.5em;
+            margin-bottom: 4px;
+        }
+        
+        .diet-text {
+            font-size: 0.8em;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        /* Transport Grid Layout */
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .transport-card {
+            position: relative;
+            aspect-ratio: 1.2;
+            max-height: 80px;
+        }
+        
+        .transport-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .transport-card label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            position: relative;
+        }
+        
+        .transport-card:hover label {
+            border-color: var(--primary-blue);
+            background: #f8f9fa;
+        }
+        
+        .transport-card input:checked + label {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .transport-icon {
+            font-size: 1.2em;
+            margin-bottom: 2px;
+        }
+        
+        .transport-text {
+            font-size: 0.75em;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+        
+        .transport-badge {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            font-size: 0.55em;
+            background: var(--spice-gold);
+            color: var(--warm-earth);
+            padding: 1px 3px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .transport-card input:checked + label .transport-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
         .navigation {
             position: fixed;
             bottom: 0;
@@ -610,18 +894,30 @@
                     
                     <div class="form-group">
                         <label>How long is your trip?</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
+                        <div class="duration-grid">
+                            <div class="duration-card" data-value="1">
                                 <input type="radio" id="duration1" name="duration" value="1">
-                                <label for="duration1">1 Day - Quick Explorer</label>
+                                <label for="duration1">
+                                    <span class="duration-icon">⚡</span>
+                                    <span class="duration-text">1 Day</span>
+                                    <span class="duration-desc">Quick</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="duration-card" data-value="2">
                                 <input type="radio" id="duration2" name="duration" value="2" checked>
-                                <label for="duration2">2 Days - Perfect Balance</label>
+                                <label for="duration2">
+                                    <span class="duration-icon">⭐</span>
+                                    <span class="duration-text">2 Days</span>
+                                    <span class="duration-desc">Perfect</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="duration-card" data-value="3">
                                 <input type="radio" id="duration3" name="duration" value="3">
-                                <label for="duration3">3 Days - Deep Dive</label>
+                                <label for="duration3">
+                                    <span class="duration-icon">🌊</span>
+                                    <span class="duration-text">3 Days</span>
+                                    <span class="duration-desc">Deep Dive</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -681,18 +977,27 @@
                     
                     <div class="form-group">
                         <label>Dietary preferences</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
+                        <div class="diet-grid">
+                            <div class="diet-card" data-value="Vegetarian">
                                 <input type="radio" id="dietVeg" name="diet" value="Vegetarian">
-                                <label for="dietVeg">🥬 Vegetarian</label>
+                                <label for="dietVeg">
+                                    <span class="diet-icon">🥬</span>
+                                    <span class="diet-text">Vegetarian</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="diet-card" data-value="Non-Vegetarian">
                                 <input type="radio" id="dietNonVeg" name="diet" value="Non-Vegetarian" checked>
-                                <label for="dietNonVeg">🐟 Non-Vegetarian</label>
+                                <label for="dietNonVeg">
+                                    <span class="diet-icon">🐟</span>
+                                    <span class="diet-text">Non-Veg</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="diet-card" data-value="Vegan">
                                 <input type="radio" id="dietVegan" name="diet" value="Vegan">
-                                <label for="dietVegan">🌱 Vegan</label>
+                                <label for="dietVegan">
+                                    <span class="diet-icon">🌱</span>
+                                    <span class="diet-text">Vegan</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -713,41 +1018,65 @@
                 <div class="step-card">
                     <div class="step-icon">🎯</div>
                     <h2 class="step-title">Your Interests</h2>
-                    <p class="step-subtitle">What excites you most about traveling? (Select multiple)</p>
+                    <p class="step-subtitle">What excites you most? (Select multiple)</p>
                     
                     <div class="form-group">
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
+                        <div class="interests-grid">
+                            <div class="interest-card" data-value="Heritage Sites">
                                 <input type="checkbox" id="heritage" name="interests" value="Heritage Sites" checked>
-                                <label for="heritage">🏛️ Heritage Sites</label>
+                                <label for="heritage">
+                                    <span class="interest-icon">🏛️</span>
+                                    <span class="interest-text">Heritage</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Food Experiences">
                                 <input type="checkbox" id="food" name="interests" value="Food Experiences" checked>
-                                <label for="food">🍽️ Food Experiences</label>
+                                <label for="food">
+                                    <span class="interest-icon">🍽️</span>
+                                    <span class="interest-text">Food</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Cultural Activities">
                                 <input type="checkbox" id="cultural" name="interests" value="Cultural Activities">
-                                <label for="cultural">🎭 Cultural Activities</label>
+                                <label for="cultural">
+                                    <span class="interest-icon">🎭</span>
+                                    <span class="interest-text">Culture</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Photography">
                                 <input type="checkbox" id="photography" name="interests" value="Photography">
-                                <label for="photography">📸 Photography</label>
+                                <label for="photography">
+                                    <span class="interest-icon">📸</span>
+                                    <span class="interest-text">Photos</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Art Scene">
                                 <input type="checkbox" id="art" name="interests" value="Art Scene">
-                                <label for="art">🎨 Art Scene</label>
+                                <label for="art">
+                                    <span class="interest-icon">🎨</span>
+                                    <span class="interest-text">Art</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Nature/Adventure">
                                 <input type="checkbox" id="nature" name="interests" value="Nature/Adventure">
-                                <label for="nature">🌿 Nature/Adventure</label>
+                                <label for="nature">
+                                    <span class="interest-icon">🌿</span>
+                                    <span class="interest-text">Nature</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Shopping">
                                 <input type="checkbox" id="shopping" name="interests" value="Shopping">
-                                <label for="shopping">🛍️ Shopping</label>
+                                <label for="shopping">
+                                    <span class="interest-icon">🛍️</span>
+                                    <span class="interest-text">Shopping</span>
+                                </label>
                             </div>
-                            <div class="checkbox-item">
+                            <div class="interest-card" data-value="Nightlife">
                                 <input type="checkbox" id="nightlife" name="interests" value="Nightlife">
-                                <label for="nightlife">🌃 Nightlife</label>
+                                <label for="nightlife">
+                                    <span class="interest-icon">🌃</span>
+                                    <span class="interest-text">Nightlife</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -763,29 +1092,42 @@
                     
                     <div class="form-group">
                         <label>Transportation preference</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
+                        <div class="transport-grid">
+                            <div class="transport-card" data-value="Walking">
                                 <input type="radio" id="transportWalk" name="transport" value="Walking">
-                                <label for="transportWalk">🚶‍♂️ Walking</label>
+                                <label for="transportWalk">
+                                    <span class="transport-icon">🚶‍♂️</span>
+                                    <span class="transport-text">Walking</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="transport-card" data-value="Public Transport">
                                 <input type="radio" id="transportPublic" name="transport" value="Public Transport">
-                                <label for="transportPublic">🚌 Public Transport</label>
+                                <label for="transportPublic">
+                                    <span class="transport-icon">🚌</span>
+                                    <span class="transport-text">Public</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="transport-card" data-value="Private Vehicle">
                                 <input type="radio" id="transportPrivate" name="transport" value="Private Vehicle">
-                                <label for="transportPrivate">🚗 Private Vehicle</label>
+                                <label for="transportPrivate">
+                                    <span class="transport-icon">🚗</span>
+                                    <span class="transport-text">Private</span>
+                                </label>
                             </div>
-                            <div class="radio-item">
+                            <div class="transport-card" data-value="Mixed">
                                 <input type="radio" id="transportMixed" name="transport" value="Mixed" checked>
-                                <label for="transportMixed">🔄 Mixed (Recommended)</label>
+                                <label for="transportMixed">
+                                    <span class="transport-icon">🔄</span>
+                                    <span class="transport-text">Mixed</span>
+                                    <span class="transport-badge">Recommended</span>
+                                </label>
                             </div>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="requirements">Special requirements (optional)</label>
-                        <textarea id="requirements" name="requirements" rows="3" placeholder="Accessibility needs, special occasions, or specific requests..."></textarea>
+                        <textarea id="requirements" name="requirements" rows="2" placeholder="Accessibility needs, special occasions, or specific requests..."></textarea>
                     </div>
                 </div>
             </div>
@@ -993,6 +1335,16 @@
                     item.classList.add('selected');
                 } else {
                     item.classList.remove('selected');
+                }
+            });
+            
+            // Handle all card types
+            document.querySelectorAll('.interest-card, .duration-card, .diet-card, .transport-card').forEach(card => {
+                const input = card.querySelector('input');
+                if (input && input.checked) {
+                    card.classList.add('selected');
+                } else {
+                    card.classList.remove('selected');
                 }
             });
         }
