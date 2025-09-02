@@ -8,29 +8,17 @@
     <meta name="author" content="Indu Ponnappan and friends">
     
     <!-- Favicon and Icons -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon-new.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-new-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-new-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-new.png">
     
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Kochi Trip Planner">
     <meta property="og:description" content="Generate personalized Kochi travel itineraries with curated local recommendations">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://devasur.github.io/kochi-trip/trip-planner.html">
-    <meta property="og:image" content="https://devasur.github.io/kochi-trip/logo-512x512.png">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Kochi Trip Planner",
-      "description": "Generate personalized Kochi travel itineraries with curated local recommendations",
-      "applicationCategory": "TravelApplication",
-      "operatingSystem": "Any"
-    }
-    </script>
+    <meta property="og:url" content="https://devasur.github.io/kochi-trip/">
+    <meta property="og:image" content="https://devasur.github.io/kochi-trip/social-og-image.png">
     
     <style>
         :root {
@@ -52,83 +40,172 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--backwater-blue) 0%, var(--primary-blue) 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: white;
             min-height: 100vh;
             color: #333;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        .container {
-            max-width: 800px;
+        .wizard-container {
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            height: 100vh;
+            max-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
         
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .about-btn {
+            background: transparent;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #666;
+            flex-shrink: 0;
+        }
+        
+        .about-btn:hover {
+            background: #f5f5f5;
+            border-color: #999;
+        }
+        
+        .app-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin-bottom: 0;
+            object-fit: cover;
         }
         
         .header h1 {
             color: var(--primary-blue);
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .header .subtitle {
-            color: var(--kerala-green);
             font-size: 1.2em;
-            margin-bottom: 15px;
+            margin: 0;
+            font-weight: 700;
+            flex: 1;
+            text-align: center;
         }
         
-        .attribution {
-            background: linear-gradient(135deg, var(--spice-gold), #ffed4e);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: var(--warm-earth);
-            display: inline-block;
+        .progress-container {
+            margin-top: 5px;
         }
         
-        .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 2px;
+            overflow: hidden;
         }
         
-        .form-section {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #f0f0f0;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--spice-gold), var(--sunset-orange));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 16.67%; /* 1/6 steps */
         }
         
-        .form-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        
-        .form-section h3 {
-            color: var(--primary-blue);
-            font-size: 1.3em;
-            margin-bottom: 15px;
+        .step-indicator {
             display: flex;
+            justify-content: center;
             align-items: center;
             gap: 8px;
+            margin-top: 8px;
+            font-size: 0.8em;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        .wizard-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-top: 140px;
+            padding-bottom: 100px;
+        }
+        
+        .step {
+            display: none;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.4s ease;
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        .step.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .step.prev {
+            transform: translateX(-50px);
+        }
+        
+        .step-card {
+            background: transparent;
+            padding: 20px 10px;
+            text-align: center;
+        }
+        
+        .step-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .step-title {
+            color: var(--primary-blue);
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .step-subtitle {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
         
         .form-group {
             margin-bottom: 20px;
+            text-align: left;
         }
         
         .form-group label {
@@ -136,87 +213,72 @@
             margin-bottom: 8px;
             font-weight: 600;
             color: #555;
+            font-size: 1em;
         }
         
         .radio-group, .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            display: grid;
+            gap: 8px;
             margin-top: 10px;
         }
         
         .radio-item, .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            background: var(--coconut-white);
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            gap: 10px;
+            padding: 12px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            flex: 1;
-            min-width: 160px;
+            transition: all 0.2s ease;
+            font-size: 0.95em;
         }
         
         .radio-item:hover, .checkbox-item:hover {
             border-color: var(--primary-blue);
-            background: #f0f8ff;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.15);
-        }
-        
-        /* Hover state should not override selected state */
-        .radio-item:has(input:checked):hover,
-        .checkbox-item:has(input:checked):hover,
-        .radio-item.selected:hover,
-        .checkbox-item.selected:hover {
-            background: linear-gradient(135deg, var(--primary-blue), var(--backwater-blue));
-            border: 3px solid var(--spice-gold);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(44, 90, 160, 0.4);
+            background: #f8f9fa;
         }
         
         .radio-item:has(input:checked),
         .checkbox-item:has(input:checked) {
-            background: linear-gradient(135deg, var(--primary-blue), var(--backwater-blue));
+            background: var(--primary-blue);
             color: white;
-            border: 3px solid var(--spice-gold);
-            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+            border-color: var(--primary-blue);
             font-weight: 600;
-            transform: translateY(-1px);
         }
         
-        /* Fallback for browsers without :has() support */
+        .radio-item:has(input:checked) label,
+        .checkbox-item:has(input:checked) label {
+            color: white !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
         .radio-item.selected,
         .checkbox-item.selected {
-            background: linear-gradient(135deg, var(--primary-blue), var(--backwater-blue));
+            background: var(--primary-blue);
             color: white;
-            border: 3px solid var(--spice-gold);
-            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+            border-color: var(--primary-blue);
             font-weight: 600;
-            transform: translateY(-1px);
         }
         
-        /* Ensure text is always readable on selected items */
-        .radio-item:has(input:checked) label,
-        .checkbox-item:has(input:checked) label,
         .radio-item.selected label,
         .checkbox-item.selected label {
             color: white !important;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         input[type="radio"], input[type="checkbox"] {
             margin: 0;
+            width: 18px;
+            height: 18px;
         }
         
         select, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
             background: white;
             transition: border-color 0.3s ease;
@@ -225,7 +287,7 @@
         select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+            box-shadow: 0 0 0 4px rgba(44, 90, 160, 0.1);
         }
         
         .range-container {
@@ -244,20 +306,20 @@
         
         .range-slider::-webkit-slider-thumb {
             appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: var(--primary-blue);
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
-        .range-slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            cursor: pointer;
-            border: none;
+        .range-current {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1.3em;
         }
         
         .range-values {
@@ -268,528 +330,985 @@
             color: #666;
         }
         
-        .range-current {
-            text-align: center;
-            margin-top: 10px;
-            font-weight: 600;
-            color: var(--primary-blue);
-            font-size: 1.1em;
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
         }
         
-        .error-message {
-            color: var(--error-red);
-            font-size: 0.9em;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .stats-container {
-            background: linear-gradient(135deg, var(--kerala-green), #32CD32);
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--backwater-blue));
             color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .stat-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 1.5em;
-            font-weight: 700;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-        
-        .generate-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .llm-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .llm-button {
-            padding: 16px 24px;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1em;
+            border-radius: 50px;
+            padding: 16px 24px;
+            font-size: 1em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
             display: flex;
             align-items: center;
+            gap: 8px;
+            min-width: 100px;
             justify-content: center;
-            gap: 12px;
-            position: relative;
-            overflow: hidden;
         }
         
-        .llm-logo {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            filter: brightness(1.1) contrast(1.1);
-        }
-        
-        .claude-btn {
-            background: linear-gradient(135deg, #ff6b35, #f54436);
-            color: white;
-        }
-        
-        .chatgpt-btn {
-            background: linear-gradient(135deg, #00a67e, #00b894);
-            color: white;
-        }
-        
-        .gemini-btn {
-            background: linear-gradient(135deg, #4285f4, #1a73e8);
-            color: white;
-        }
-        
-        .llm-button:hover {
+        .nav-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(44, 90, 160, 0.3);
         }
         
-        .llm-button:disabled {
-            opacity: 0.6;
+        .nav-btn:disabled {
+            background: #ccc;
             cursor: not-allowed;
             transform: none;
         }
         
-        .preview-button, .copy-button {
-            background: var(--kerala-green);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            cursor: pointer;
-            margin: 10px;
-            transition: all 0.3s ease;
+        .nav-btn.generate {
+            background: linear-gradient(135deg, var(--kerala-green), #32CD32);
+            flex: 1;
+            max-width: 200px;
+            margin: 0 10px;
         }
         
-        .preview-button:hover, .copy-button:hover {
-            background: #1e7e1e;
-        }
-        
-        .preview-container {
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            display: none;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .preview-container.show {
-            display: block;
-        }
-        
-        .preview-content {
-            white-space: pre-wrap;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
-            color: #333;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top: 3px solid white;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .about-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-        
-        .about-section h3 {
+        .step-counter {
             color: var(--primary-blue);
-            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 0.9em;
         }
         
-        .progress-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            z-index: 1000;
+        /* LLM Selection Step */
+        .llm-buttons {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
         }
         
-        .progress-bar {
-            height: 100%;
-            background: var(--spice-gold);
-            width: 0%;
-            transition: width 0.3s ease;
+        .llm-button {
+            padding: 20px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+            min-height: 70px;
+        }
+        
+        .llm-logo {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        
+        .claude-btn {
+            background: linear-gradient(135deg, #2c1810, #4a2c1a);
+            color: white;
+            border: 2px solid #d97757;
+        }
+        
+        .chatgpt-btn {
+            background: linear-gradient(135deg, #0d1b2a, #1b3a4b);
+            color: white;
+            border: 2px solid #74aa9c;
+        }
+        
+        .gemini-btn {
+            background: linear-gradient(135deg, #1e3a8a, #3730a3);
+            color: white;
+            border: 2px solid #60a5fa;
+        }
+        
+        .llm-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
+            .wizard-container {
+                max-width: 100%;
             }
             
-            .header h1 {
-                font-size: 2em;
+            .header {
+                max-width: 100%;
             }
             
-            .form-container, .generate-section, .about-section {
+            .navigation {
+                max-width: 100%;
+            }
+            
+            .step-card {
                 padding: 20px;
+                margin: 0 10px;
             }
             
-            .radio-group, .checkbox-group {
-                flex-direction: column;
+            .step-title {
+                font-size: 1.5em;
             }
             
             .radio-item, .checkbox-item {
-                min-width: auto;
-            }
-            
-            .llm-buttons {
-                grid-template-columns: 1fr;
+                padding: 14px 16px;
             }
         }
         
         /* Animations */
-        .form-container, .generate-section, .about-section {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .form-container {
-            animation-delay: 0.1s;
-        }
-        
-        .generate-section {
-            animation-delay: 0.2s;
-        }
-        
-        .about-section {
-            animation-delay: 0.3s;
-        }
-        
-        @keyframes fadeInUp {
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
         
-        /* Focus accessibility */
-        .radio-item:focus-within,
-        .checkbox-item:focus-within {
-            outline: 2px solid var(--primary-blue);
-            outline-offset: 2px;
+        .step.active {
+            animation: slideIn 0.4s ease;
         }
         
-        /* Print styles */
-        @media print {
-            .generate-section, .llm-buttons {
-                display: none;
-            }
+        /* Touch gestures */
+        .wizard-content {
+            touch-action: pan-y;
+        }
+        
+        /* About Dialog */
+        .about-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .about-overlay.active {
+            display: flex;
+        }
+        
+        .about-dialog {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .about-dialog h3 {
+            color: var(--primary-blue);
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .credits {
+            margin-bottom: 15px;
+            text-align: left;
+            background: rgba(44, 90, 160, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--spice-gold);
+        }
+        
+        .credits p {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .credits strong {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        .description {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="progress-indicator">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div class="container">
+    <div class="wizard-container">
         <div class="header">
-            <h1>🏛️ Kochi Trip Planner</h1>
-            <p class="subtitle">Generate Your Perfect Personalized Itinerary</p>
-            <div class="attribution">
-                ✨ Curated by Indu Ponnappan and friends
+            <div class="header-top">
+                <img src="app-logo-192x192.png" alt="Kochi Trip Planner" class="app-logo">
+                <h1>Kochi Trip Planner</h1>
+                <button class="about-btn" onclick="showAboutDialog()">ℹ️</button>
             </div>
-        </div>
-        
-        <div class="stats-container" id="statsContainer">
-            <h3>🌊 Kerala's Queen of Arabian Sea Awaits</h3>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number" id="restaurantCount">-</span>
-                    <span class="stat-label">Restaurants</span>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="attractionCount">-</span>
-                    <span class="stat-label">Attractions</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="heritageCount">-</span>
-                    <span class="stat-label">Heritage Sites</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="hotelCount">-</span>
-                    <span class="stat-label">Hotels</span>
+                <div class="step-indicator">
+                    <span id="stepCounter">Step 1 of 6</span>
                 </div>
             </div>
         </div>
         
-        <form class="form-container" id="tripPlannerForm">
-            <div class="form-section">
-                <h3>📅 Trip Basics</h3>
-                
-                <div class="form-group">
-                    <label>Trip Duration</label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="duration1" name="duration" value="1" required>
-                            <label for="duration1">1 Day</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="duration2" name="duration" value="2" required>
-                            <label for="duration2">2 Days</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="duration3" name="duration" value="3" required>
-                            <label for="duration3">3 Days</label>
-                        </div>
-                    </div>
-                    <div class="error-message" id="durationError">Please select trip duration</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="travelers">Number of Travelers</label>
-                    <select id="travelers" name="travelers" required>
-                        <option value="">Select number of travelers</option>
-                        <option value="1">1 person</option>
-                        <option value="2">2 people</option>
-                        <option value="3">3 people</option>
-                        <option value="4">4 people</option>
-                        <option value="5">5 people</option>
-                        <option value="6">6 people</option>
-                        <option value="7">7 people</option>
-                        <option value="8">8 people</option>
-                    </select>
-                    <div class="error-message" id="travelersError">Please select number of travelers</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="baseLocation">Base Location</label>
-                    <select id="baseLocation" name="baseLocation" required>
-                        <option value="">Select your base area</option>
-                        <option value="Fort Kochi">Fort Kochi</option>
-                        <option value="Ernakulam">Ernakulam</option>
-                        <option value="Flexible">Flexible</option>
-                    </select>
-                    <div class="error-message" id="baseLocationError">Please select base location</div>
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <h3>💰 Budget & Preferences</h3>
-                
-                <div class="form-group">
-                    <label>Budget per person per day</label>
-                    <div class="range-container">
-                        <input type="range" id="budget" name="budget" min="500" max="5000" value="2000" step="250" class="range-slider">
-                        <div class="range-values">
-                            <span>₹500</span>
-                            <span>₹5000</span>
-                        </div>
-                        <div class="range-current" id="budgetValue">₹2000</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Dietary Preferences</label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="dietVeg" name="diet" value="Vegetarian" required>
-                            <label for="dietVeg">🥬 Vegetarian</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="dietNonVeg" name="diet" value="Non-Vegetarian" required>
-                            <label for="dietNonVeg">🐟 Non-Vegetarian</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="dietVegan" name="diet" value="Vegan" required>
-                            <label for="dietVegan">🌱 Vegan</label>
+        <div class="wizard-content">
+            <!-- Step 1: Trip Basics -->
+            <div class="step active" id="step1">
+                <div class="step-card">
+                    <div class="step-icon">📅</div>
+                    <h2 class="step-title">Trip Basics</h2>
+                    <p class="step-subtitle">Let's start with the fundamentals of your Kochi adventure</p>
+                    
+                    <div class="form-group">
+                        <label>How long is your trip?</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="duration1" name="duration" value="1">
+                                <label for="duration1">1 Day - Quick Explorer</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="duration2" name="duration" value="2" checked>
+                                <label for="duration2">2 Days - Perfect Balance</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="duration3" name="duration" value="3">
+                                <label for="duration3">3 Days - Deep Dive</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="error-message" id="dietError">Please select dietary preference</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="alcohol" name="alcohol" value="Yes">
-                        🍻 Include alcohol experiences (toddy shops, bars)
-                    </label>
+                    
+                    <div class="form-group">
+                        <label for="travelers">Number of travelers</label>
+                        <select id="travelers" name="travelers">
+                            <option value="2" selected>2 people</option>
+                            <option value="1">1 person</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                            <option value="5">5 people</option>
+                            <option value="6">6 people</option>
+                            <option value="7">7 people</option>
+                            <option value="8">8 people</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             
-            <div class="form-section">
-                <h3>🎯 Interests & Transportation</h3>
-                
-                <div class="form-group">
-                    <label>Primary Interests (select multiple)</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="heritage" name="interests" value="Heritage Sites">
-                            <label for="heritage">🏛️ Heritage Sites</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="food" name="interests" value="Food Experiences">
-                            <label for="food">🍽️ Food Experiences</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="cultural" name="interests" value="Cultural Activities">
-                            <label for="cultural">🎭 Cultural Activities</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="photography" name="interests" value="Photography">
-                            <label for="photography">📸 Photography</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="art" name="interests" value="Art Scene">
-                            <label for="art">🎨 Art Scene</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="nature" name="interests" value="Nature/Adventure">
-                            <label for="nature">🌿 Nature/Adventure</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="shopping" name="interests" value="Shopping">
-                            <label for="shopping">🛍️ Shopping</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="nightlife" name="interests" value="Nightlife">
-                            <label for="nightlife">🌃 Nightlife</label>
+            <!-- Step 2: Location & Budget -->
+            <div class="step" id="step2">
+                <div class="step-card">
+                    <div class="step-icon">🏛️</div>
+                    <h2 class="step-title">Location & Budget</h2>
+                    <p class="step-subtitle">Where you'll stay and how much you'd like to spend</p>
+                    
+                    <div class="form-group">
+                        <label for="baseLocation">Base location</label>
+                        <select id="baseLocation" name="baseLocation">
+                            <option value="Fort Kochi" selected>Fort Kochi - Historic Heart</option>
+                            <option value="Ernakulam">Ernakulam - Modern Center</option>
+                            <option value="Flexible">Flexible - Best Options</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Budget per person per day</label>
+                        <div class="range-container">
+                            <input type="range" id="budget" name="budget" min="500" max="5000" value="2000" step="250" class="range-slider">
+                            <div class="range-values">
+                                <span>₹500</span>
+                                <span>₹5000</span>
+                            </div>
+                            <div class="range-current" id="budgetValue">₹2,000</div>
                         </div>
                     </div>
-                    <div class="error-message" id="interestsError">Please select at least one interest</div>
                 </div>
-                
-                <div class="form-group">
-                    <label>Transportation Preference</label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="transportWalk" name="transport" value="Walking" required>
-                            <label for="transportWalk">🚶‍♂️ Walking</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="transportPublic" name="transport" value="Public Transport" required>
-                            <label for="transportPublic">🚌 Public Transport</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="transportPrivate" name="transport" value="Private Vehicle" required>
-                            <label for="transportPrivate">🚗 Private Vehicle</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="transportMixed" name="transport" value="Mixed" required>
-                            <label for="transportMixed">🔄 Mixed</label>
+            </div>
+            
+            <!-- Step 3: Food Preferences -->
+            <div class="step" id="step3">
+                <div class="step-card">
+                    <div class="step-icon">🍽️</div>
+                    <h2 class="step-title">Food Preferences</h2>
+                    <p class="step-subtitle">Let's customize your culinary journey through Kerala</p>
+                    
+                    <div class="form-group">
+                        <label>Dietary preferences</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="dietVeg" name="diet" value="Vegetarian">
+                                <label for="dietVeg">🥬 Vegetarian</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="dietNonVeg" name="diet" value="Non-Vegetarian" checked>
+                                <label for="dietNonVeg">🐟 Non-Vegetarian</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="dietVegan" name="diet" value="Vegan">
+                                <label for="dietVegan">🌱 Vegan</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="error-message" id="transportError">Please select transportation preference</div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="alcohol" name="alcohol" value="Yes">
+                                <label for="alcohol">🍻 Include alcohol experiences (toddy shops, bars)</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="form-section">
-                <h3>📝 Additional Details</h3>
-                
-                <div class="form-group">
-                    <label for="requirements">Special Requirements (optional)</label>
-                    <textarea id="requirements" name="requirements" rows="4" placeholder="Any specific needs, accessibility requirements, or special requests..."></textarea>
+            <!-- Step 4: Interests -->
+            <div class="step" id="step4">
+                <div class="step-card">
+                    <div class="step-icon">🎯</div>
+                    <h2 class="step-title">Your Interests</h2>
+                    <p class="step-subtitle">What excites you most about traveling? (Select multiple)</p>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="heritage" name="interests" value="Heritage Sites" checked>
+                                <label for="heritage">🏛️ Heritage Sites</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="food" name="interests" value="Food Experiences" checked>
+                                <label for="food">🍽️ Food Experiences</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cultural" name="interests" value="Cultural Activities">
+                                <label for="cultural">🎭 Cultural Activities</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="photography" name="interests" value="Photography">
+                                <label for="photography">📸 Photography</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="art" name="interests" value="Art Scene">
+                                <label for="art">🎨 Art Scene</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="nature" name="interests" value="Nature/Adventure">
+                                <label for="nature">🌿 Nature/Adventure</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="shopping" name="interests" value="Shopping">
+                                <label for="shopping">🛍️ Shopping</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="nightlife" name="interests" value="Nightlife">
+                                <label for="nightlife">🌃 Nightlife</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
-        
-        <div class="generate-section">
-            <h3>✨ Generate Your Itinerary</h3>
-            <p>Select your preferred AI assistant to create a personalized Kochi travel plan</p>
-            <p style="font-size: 0.9em; color: #666; margin-bottom: 20px;">
-                <strong>Note:</strong> ChatGPT supports direct URL prompting. Claude and Gemini will copy the prompt to your clipboard - just paste it after the page opens.
-            </p>
             
-            <div class="llm-buttons">
-                <button type="button" class="llm-button claude-btn" id="claudeBtn" onclick="generateItinerary('claude')">
-                    <img src="claude-logo-24.png" alt="Claude" class="llm-logo">
-                    <span>Generate with Claude</span>
-                </button>
-                
-                <button type="button" class="llm-button chatgpt-btn" id="chatgptBtn" onclick="generateItinerary('chatgpt')">
-                    <img src="openai-logo-24.png" alt="ChatGPT" class="llm-logo">
-                    <span>Generate with ChatGPT</span>
-                </button>
-                
-                <button type="button" class="llm-button gemini-btn" id="geminiBtn" onclick="generateItinerary('gemini')">
-                    <img src="gemini-logo-24.png" alt="Gemini" class="llm-logo">
-                    <span>Generate with Gemini</span>
-                </button>
+            <!-- Step 5: Transportation & Details -->
+            <div class="step" id="step5">
+                <div class="step-card">
+                    <div class="step-icon">🚗</div>
+                    <h2 class="step-title">Transportation</h2>
+                    <p class="step-subtitle">How would you prefer to get around Kochi?</p>
+                    
+                    <div class="form-group">
+                        <label>Transportation preference</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="transportWalk" name="transport" value="Walking">
+                                <label for="transportWalk">🚶‍♂️ Walking</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="transportPublic" name="transport" value="Public Transport">
+                                <label for="transportPublic">🚌 Public Transport</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="transportPrivate" name="transport" value="Private Vehicle">
+                                <label for="transportPrivate">🚗 Private Vehicle</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="transportMixed" name="transport" value="Mixed" checked>
+                                <label for="transportMixed">🔄 Mixed (Recommended)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requirements">Special requirements (optional)</label>
+                        <textarea id="requirements" name="requirements" rows="3" placeholder="Accessibility needs, special occasions, or specific requests..."></textarea>
+                    </div>
+                </div>
             </div>
             
-            <div>
-                <button type="button" class="preview-button" onclick="previewPrompt()">
-                    👁️ Preview Prompt
-                </button>
-                <button type="button" class="copy-button" onclick="copyPrompt()">
-                    📋 Copy to Clipboard
-                </button>
-            </div>
-            
-            <div class="preview-container" id="previewContainer">
-                <h4>Generated Prompt Preview:</h4>
-                <div class="preview-content" id="previewContent"></div>
+            <!-- Step 6: Generate -->
+            <div class="step" id="step6">
+                <div class="step-card">
+                    <div class="step-icon">✨</div>
+                    <h2 class="step-title">Generate Your Itinerary</h2>
+                    <p class="step-subtitle">Choose your AI assistant to create your personalized Kochi travel plan</p>
+                    
+                    <div class="llm-buttons">
+                        <button type="button" class="llm-button claude-btn" onclick="generateItinerary('claude')">
+                            <img src="claude-logo-24.png" alt="Claude" class="llm-logo">
+                            <span>Generate with Claude</span>
+                        </button>
+                        
+                        <button type="button" class="llm-button chatgpt-btn" onclick="generateItinerary('chatgpt')">
+                            <img src="openai-logo-24.png" alt="ChatGPT" class="llm-logo">
+                            <span>Generate with ChatGPT</span>
+                        </button>
+                        
+                        <button type="button" class="llm-button gemini-btn" onclick="generateItinerary('gemini')">
+                            <img src="gemini-logo-24.png" alt="Gemini" class="llm-logo">
+                            <span>Generate with Gemini</span>
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 12px; text-align: left;">
+                        <h4 style="color: var(--primary-blue); margin-bottom: 10px;">📋 Your Selections:</h4>
+                        <div id="selectionSummary" style="font-size: 0.9em; color: #666; line-height: 1.6;">
+                            <!-- Summary will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="about-section">
-            <h3>📖 About This Database</h3>
-            <p>This itinerary generator uses a carefully curated database of Kochi's best restaurants, attractions, and experiences, compiled by <strong>Indu Ponnappan and friends</strong> who are passionate local food and travel enthusiasts.</p>
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousStep()" disabled>
+                ← Previous
+            </button>
             
-            <p>Our database includes verified information about operating hours, contact details, specialties, and authentic local recommendations that you won't find in typical tourist guides.</p>
+            <div class="step-counter" id="navStepCounter">
+                1 / 6
+            </div>
             
-            <p><strong>Data Source:</strong> <a href="https://devasur.github.io/kochi-trip/kochi_comprehensive_locations_csv.txt" target="_blank">Comprehensive Kochi Locations Database</a></p>
+            <button class="nav-btn" id="nextBtn" onclick="nextStep()">
+                Next →
+            </button>
         </div>
     </div>
     
-    <script src="trip-planner.js"></script>
+    <!-- About Dialog -->
+    <div class="about-overlay" id="aboutOverlay" onclick="hideAboutDialog()">
+        <div class="about-dialog" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="hideAboutDialog()">×</button>
+            <h3>About</h3>
+            <div class="credits">
+                <p><strong>കഥ, തിരക്കഥ, സംഭാഷണം:</strong> ഇന്ദു പൊന്നപ്പനും സുഹൃത്തുക്കളും</p>
+                <p><strong>സംവിധാനം, നിർമാണം:</strong> ഇന്റലിജന്റ്ഷ്യ</p>
+                <p><strong>ക്യാമറ:</strong> Claude AI</p>
+            </div>
+            <p class="description">Curated with ❤️ by local Kochi enthusiasts for authentic travel experiences</p>
+        </div>
+    </div>
+    
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressBar();
+            updateSelectionStyles();
+            updateSelectionSummary();
+            
+            // Budget slider functionality
+            const budgetSlider = document.getElementById('budget');
+            const budgetValue = document.getElementById('budgetValue');
+            
+            budgetSlider.addEventListener('input', function() {
+                budgetValue.textContent = '₹' + parseInt(this.value).toLocaleString();
+                updateSelectionSummary();
+            });
+            
+            // Form change listeners
+            document.addEventListener('change', function(e) {
+                updateSelectionStyles();
+                updateSelectionSummary();
+            });
+            
+            // Touch gestures
+            const wizardContent = document.querySelector('.wizard-content');
+            
+            wizardContent.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            wizardContent.addEventListener('touchend', function(e) {
+                if (!e.changedTouches[0]) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                
+                // Only trigger if horizontal swipe is more significant than vertical
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // Swipe left - next step
+                        nextStep();
+                    } else {
+                        // Swipe right - previous step
+                        previousStep();
+                    }
+                }
+            }, { passive: true });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight') nextStep();
+                if (e.key === 'ArrowLeft') previousStep();
+            });
+        });
+        
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                // Hide current step
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                currentStep++;
+                
+                // Show next step
+                const nextStepEl = document.getElementById(`step${currentStep}`);
+                nextStepEl.classList.add('active');
+                
+                updateNavigation();
+                updateProgressBar();
+                updateSelectionSummary();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        function previousStep() {
+            if (currentStep > 1) {
+                // Hide current step
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                currentStep--;
+                
+                // Show previous step
+                const prevStepEl = document.getElementById(`step${currentStep}`);
+                prevStepEl.classList.add('active');
+                prevStepEl.classList.add('prev');
+                
+                setTimeout(() => {
+                    prevStepEl.classList.remove('prev');
+                }, 400);
+                
+                updateNavigation();
+                updateProgressBar();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const stepCounter = document.getElementById('navStepCounter');
+            
+            prevBtn.disabled = currentStep === 1;
+            
+            if (currentStep === totalSteps) {
+                nextBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'flex';
+                nextBtn.disabled = false;
+            }
+            
+            stepCounter.textContent = `${currentStep} / ${totalSteps}`;
+        }
+        
+        function updateProgressBar() {
+            const progressFill = document.getElementById('progressFill');
+            const stepCounter = document.getElementById('stepCounter');
+            
+            const progress = (currentStep / totalSteps) * 100;
+            progressFill.style.width = `${progress}%`;
+            stepCounter.textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+        
+        function updateSelectionStyles() {
+            // Handle radio buttons and checkboxes
+            document.querySelectorAll('.radio-item, .checkbox-item').forEach(item => {
+                const input = item.querySelector('input');
+                if (input && input.checked) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+        }
+        
+        function updateSelectionSummary() {
+            if (currentStep !== totalSteps) return;
+            
+            const summary = document.getElementById('selectionSummary');
+            const formData = getFormData();
+            
+            summary.innerHTML = `
+                <strong>Duration:</strong> ${formData.duration} day${formData.duration > 1 ? 's' : ''}<br>
+                <strong>Travelers:</strong> ${formData.travelers} people<br>
+                <strong>Base:</strong> ${formData.baseLocation}<br>
+                <strong>Budget:</strong> ${formData.budget} per person per day<br>
+                <strong>Diet:</strong> ${formData.diet}<br>
+                <strong>Interests:</strong> ${formData.interests || 'None selected'}<br>
+                <strong>Transport:</strong> ${formData.transport}
+            `;
+        }
+        
+        function getFormData() {
+            const form = document.querySelector('.wizard-container');
+            const formData = new FormData();
+            
+            // Get all form inputs
+            form.querySelectorAll('input, select, textarea').forEach(input => {
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                    if (input.checked) {
+                        if (input.name === 'interests') {
+                            const existing = formData.get('interests') || '';
+                            formData.set('interests', existing ? existing + ', ' + input.value : input.value);
+                        } else {
+                            formData.set(input.name, input.value);
+                        }
+                    }
+                } else {
+                    formData.set(input.name, input.value);
+                }
+            });
+            
+            const interests = Array.from(form.querySelectorAll('input[name="interests"]:checked'))
+                .map(cb => cb.value);
+            
+            return {
+                duration: formData.get('duration') || '2',
+                travelers: formData.get('travelers') || '2',
+                baseLocation: formData.get('baseLocation') || 'Fort Kochi',
+                budget: '₹' + parseInt(formData.get('budget') || '2000').toLocaleString(),
+                diet: formData.get('diet') || 'Non-Vegetarian',
+                alcohol: formData.get('alcohol') === 'Yes',
+                interests: interests.join(', '),
+                transport: formData.get('transport') || 'Mixed',
+                requirements: formData.get('requirements') || 'None specified'
+            };
+        }
+        
+        // Import the trip planner functionality
+        function generateItinerary(llm) {
+            const prompt = generatePrompt();
+            if (!prompt) return;
+            
+            const encodedPrompt = encodeURIComponent(prompt);
+            
+            switch(llm) {
+                case 'claude':
+                    showPromptDialog('Claude', 'claude.ai', prompt, () => {
+                        window.open('https://claude.ai', '_blank');
+                    });
+                    return;
+                case 'chatgpt':
+                    const chatgptUrl = `https://chat.openai.com/?q=${encodedPrompt}`;
+                    const newWindow = window.open(chatgptUrl, '_blank');
+                    
+                    setTimeout(() => {
+                        if (!newWindow || newWindow.closed) {
+                            copyToClipboard(prompt);
+                            showError('Popup blocked. Prompt copied to clipboard. Please paste it manually in ChatGPT');
+                        }
+                    }, 1000);
+                    return;
+                case 'gemini':
+                    showPromptDialog('Gemini', 'gemini.google.com', prompt, () => {
+                        window.open('https://gemini.google.com', '_blank');
+                    });
+                    return;
+                default:
+                    showError('Invalid LLM selection');
+                    return;
+            }
+        }
+        
+        function generatePrompt() {
+            const formData = getFormData();
+            
+            // Use a simplified template for the wizard
+            const template = `You are a local Kochi expert helping create a personalized ${formData.duration}-day itinerary.
+
+**Trip Details:**
+- Duration: ${formData.duration} day${formData.duration > 1 ? 's' : ''}
+- Travelers: ${formData.travelers} people
+- Base location: ${formData.baseLocation}
+- Budget: ${formData.budget} per person per day
+- Dietary preference: ${formData.diet}
+- Transportation: ${formData.transport}
+- Interests: ${formData.interests}
+${formData.alcohol ? '- Alcohol preference: Yes, include toddy shops and bars' : '- Alcohol preference: No alcohol experiences'}
+${formData.requirements !== 'None specified' ? `- Special requirements: ${formData.requirements}` : ''}
+
+**Database Reference:**
+Use this comprehensive local database for all recommendations: https://devasur.github.io/kochi-trip/kochi_comprehensive_locations_csv.txt
+
+**CRITICAL: Google Maps Link Format**
+For EVERY location mentioned, create clickable Google Maps links using the exact latitude and longitude from the database:
+- Format: [📍 Location Name](https://www.google.com/maps/search/Location+Name+Area/@Latitude,Longitude,17z)
+- Example: [📍 French Toast Fort Kochi](https://www.google.com/maps/search/French+Toast+Fort+Kochi/@9.9654,76.2423,17z)
+- Replace spaces with + in the search term
+- Use exact coordinates from Latitude,Longitude columns in database
+- Always include the 📍 map pin icon
+
+**Requirements:**
+1. Create a detailed hour-by-hour itinerary
+2. Include breakfast, lunch, dinner, and snack recommendations from the database
+3. Feature must-see attractions based on selected interests
+4. Include transportation details between locations
+5. For each location, provide:
+   - Exact name as listed in database
+   - Operating hours
+   - Estimated duration of visit
+   - Clickable Google Maps link with coordinates
+   - Estimated costs
+   - Why it matches their interests
+
+Please create a practical, personalized itinerary for this Kochi adventure!`;
+
+            return template;
+        }
+        
+        function showPromptDialog(llmName, llmUrl, prompt, onProceed) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 20000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const dialog = document.createElement('div');
+            dialog.style.cssText = `
+                background: white;
+                border-radius: 16px;
+                padding: 30px;
+                max-width: 500px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+                position: relative;
+            `;
+            
+            dialog.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 10px; font-size: 1.4em;">
+                        ✨ Ready to Generate with ${llmName}
+                    </h3>
+                    <p style="color: #666; line-height: 1.6;">
+                        Your personalized Kochi itinerary prompt is ready! Here's what will happen:
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <span style="background: var(--primary-blue); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">1</span>
+                        <span>Your prompt will be copied to clipboard automatically</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <span style="background: var(--primary-blue); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">2</span>
+                        <span>${llmName} will open in a new tab</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="background: var(--primary-blue); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">3</span>
+                        <span><strong>Paste (Ctrl+V or Cmd+V)</strong> the prompt and start planning!</span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                    <button id="cancelDialog" style="
+                        background: #6c757d;
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 1em;
+                        transition: all 0.3s ease;
+                    ">Cancel</button>
+                    <button id="proceedDialog" style="
+                        background: linear-gradient(135deg, var(--primary-blue), var(--backwater-blue));
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 1em;
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                    ">🚀 Copy Prompt & Open ${llmName}</button>
+                </div>
+            `;
+            
+            overlay.appendChild(dialog);
+            document.body.appendChild(overlay);
+            
+            document.getElementById('cancelDialog').addEventListener('click', () => {
+                overlay.remove();
+            });
+            
+            document.getElementById('proceedDialog').addEventListener('click', () => {
+                copyToClipboard(prompt);
+                
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: var(--success-green);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    z-index: 25000;
+                    font-weight: 600;
+                    animation: fadeIn 0.3s ease;
+                `;
+                successMsg.textContent = '✅ Prompt copied! Opening ' + llmName + '...';
+                document.body.appendChild(successMsg);
+                
+                overlay.remove();
+                
+                setTimeout(() => {
+                    onProceed();
+                    successMsg.remove();
+                }, 1500);
+            });
+            
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
+        }
+        
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                return true;
+            }
+        }
+        
+        function showError(message) {
+            let errorDiv = document.getElementById('errorNotification');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.id = 'errorNotification';
+                errorDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #dc3545;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    max-width: 300px;
+                    animation: slideIn 0.3s ease;
+                `;
+                document.body.appendChild(errorDiv);
+            }
+            
+            errorDiv.textContent = message;
+            
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // About Dialog Functions
+        function showAboutDialog() {
+            document.getElementById('aboutOverlay').classList.add('active');
+        }
+        
+        function hideAboutDialog() {
+            document.getElementById('aboutOverlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
