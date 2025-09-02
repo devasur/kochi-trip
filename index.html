@@ -857,22 +857,48 @@
         
         .credits {
             margin-bottom: 15px;
-            text-align: left;
             background: rgba(44, 90, 160, 0.05);
             padding: 15px;
             border-radius: 10px;
             border-left: 4px solid var(--spice-gold);
         }
         
-        .credits p {
-            margin-bottom: 8px;
-            font-size: 0.95em;
-            line-height: 1.5;
+        .credit-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 8px;
         }
         
-        .credits strong {
+        .credit-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .credit-labels {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 120px;
+        }
+        
+        .credit-labels div {
             color: var(--primary-blue);
             font-weight: 600;
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+        
+        .credit-colon {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-top: 1px;
+        }
+        
+        .credit-value {
+            font-size: 0.9em;
+            line-height: 1.4;
+            flex-grow: 1;
         }
         
         .description {
@@ -1207,9 +1233,30 @@
                 <h3>About</h3>
             </div>
             <div class="credits">
-                <p><strong>കഥ, തിരക്കഥ, സംഭാഷണം:</strong> ഇന്ദു പൊന്നപ്പനും സുഹൃത്തുക്കളും</p>
-                <p><strong>സംവിധാനം, നിർമാണം:</strong> ഇന്റലിജന്റ്ഷ്യ</p>
-                <p><strong>ക്യാമറ:</strong> Claude AI</p>
+                <div class="credit-row">
+                    <div class="credit-labels">
+                        <div>കഥ</div>
+                        <div>തിരക്കഥ</div>
+                        <div>സംഭാഷണം</div>
+                    </div>
+                    <span class="credit-colon">:</span>
+                    <span class="credit-value">ഇന്ദു പൊന്നപ്പനും സുഹൃത്തുക്കളും</span>
+                </div>
+                <div class="credit-row">
+                    <div class="credit-labels">
+                        <div>സംവിധാനം</div>
+                        <div>നിർമാണം</div>
+                    </div>
+                    <span class="credit-colon">:</span>
+                    <span class="credit-value">ഇന്റലിജന്റ്ഷ്യ</span>
+                </div>
+                <div class="credit-row">
+                    <div class="credit-labels">
+                        <div>ക്യാമറ</div>
+                    </div>
+                    <span class="credit-colon">:</span>
+                    <span class="credit-value">Claude AI</span>
+                </div>
             </div>
             <p class="description">Curated with ❤️ by local Kochi enthusiasts for authentic travel experiences</p>
         </div>
