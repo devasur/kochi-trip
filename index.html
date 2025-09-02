@@ -345,9 +345,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
             position: relative;
             overflow: hidden;
+        }
+        
+        .llm-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: brightness(1.1) contrast(1.1);
         }
         
         .claude-btn {
@@ -743,17 +750,17 @@
             
             <div class="llm-buttons">
                 <button type="button" class="llm-button claude-btn" id="claudeBtn" onclick="generateItinerary('claude')">
-                    <span>🔥</span>
+                    <img src="claude-logo-24.png" alt="Claude" class="llm-logo">
                     <span>Generate with Claude</span>
                 </button>
                 
                 <button type="button" class="llm-button chatgpt-btn" id="chatgptBtn" onclick="generateItinerary('chatgpt')">
-                    <span>💬</span>
+                    <img src="openai-logo-24.png" alt="ChatGPT" class="llm-logo">
                     <span>Generate with ChatGPT</span>
                 </button>
                 
                 <button type="button" class="llm-button gemini-btn" id="geminiBtn" onclick="generateItinerary('gemini')">
-                    <span>✨</span>
+                    <img src="gemini-logo-24.png" alt="Gemini" class="llm-logo">
                     <span>Generate with Gemini</span>
                 </button>
             </div>
