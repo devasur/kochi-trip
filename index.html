@@ -676,9 +676,16 @@
         
         /* LLM Selection Step */
         .llm-buttons {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: 15px;
             margin-top: 20px;
+        }
+        
+        .secondary-llms {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
         
         .llm-button {
@@ -725,6 +732,45 @@
         .llm-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Hero LLM Button */
+        .hero-llm {
+            position: relative;
+            border: 3px solid var(--spice-gold) !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+            padding-right: 100px !important;
+        }
+        
+        .hero-llm:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        }
+        
+        .hero-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--spice-gold);
+            color: var(--warm-earth);
+            font-size: 0.6em;
+            font-weight: 700;
+            padding: 3px 6px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            z-index: 1;
+        }
+        
+        /* Secondary LLM buttons - smaller size */
+        .secondary-llms .llm-button {
+            padding: 15px;
+            min-height: 60px;
+        }
+        
+        .secondary-llms .llm-logo {
+            width: 24px;
+            height: 24px;
         }
         
         /* Mobile Responsiveness */
@@ -1183,20 +1229,25 @@
                     <p class="step-subtitle">Choose your AI assistant to create your personalized Kochi travel plan</p>
                     
                     <div class="llm-buttons">
-                        <button type="button" class="llm-button claude-btn" onclick="generateItinerary('claude')">
-                            <img src="claude-logo-24.png" alt="Claude" class="llm-logo">
-                            <span>Generate with Claude</span>
-                        </button>
-                        
-                        <button type="button" class="llm-button chatgpt-btn" onclick="generateItinerary('chatgpt')">
+                        <!-- Hero Option - ChatGPT with direct URL support -->
+                        <button type="button" class="llm-button chatgpt-btn hero-llm" onclick="generateItinerary('chatgpt')">
                             <img src="openai-logo-24.png" alt="ChatGPT" class="llm-logo">
                             <span>Generate with ChatGPT</span>
+                            <span class="hero-badge">Instant Launch</span>
                         </button>
                         
-                        <button type="button" class="llm-button gemini-btn" onclick="generateItinerary('gemini')">
-                            <img src="gemini-logo-24.png" alt="Gemini" class="llm-logo">
-                            <span>Generate with Gemini</span>
-                        </button>
+                        <!-- Secondary Options - Copy & Paste -->
+                        <div class="secondary-llms">
+                            <button type="button" class="llm-button claude-btn" onclick="generateItinerary('claude')">
+                                <img src="claude-logo-24.png" alt="Claude" class="llm-logo">
+                                <span>Claude</span>
+                            </button>
+                            
+                            <button type="button" class="llm-button gemini-btn" onclick="generateItinerary('gemini')">
+                                <img src="gemini-logo-24.png" alt="Gemini" class="llm-logo">
+                                <span>Gemini</span>
+                            </button>
+                        </div>
                     </div>
                     
                     <div style="margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 12px; text-align: left;">
