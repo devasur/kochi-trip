@@ -539,14 +539,17 @@
         .transport-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 15px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .transport-card {
             position: relative;
-            aspect-ratio: 1.2;
-            max-height: 80px;
+            aspect-ratio: 1;
+            max-height: 120px;
         }
         
         .transport-card input[type="radio"] {
@@ -565,7 +568,7 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            padding: 6px;
+            padding: 8px;
             border: 1px solid #ddd;
             border-radius: 8px;
             background: white;
@@ -587,14 +590,14 @@
         }
         
         .transport-icon {
-            font-size: 1.2em;
-            margin-bottom: 2px;
+            font-size: 1.5em;
+            margin-bottom: 4px;
         }
         
         .transport-text {
-            font-size: 0.75em;
+            font-size: 0.8em;
             font-weight: 600;
-            line-height: 1.1;
+            line-height: 1.2;
         }
         
         .transport-badge {
@@ -829,11 +832,26 @@
             background: #f0f0f0;
         }
         
+        .about-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .about-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+        
         .about-dialog h3 {
             color: var(--primary-blue);
             font-size: 1.4em;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin: 0;
             text-align: center;
         }
         
@@ -1091,7 +1109,6 @@
                     <p class="step-subtitle">How would you prefer to get around Kochi?</p>
                     
                     <div class="form-group">
-                        <label>Transportation preference</label>
                         <div class="transport-grid">
                             <div class="transport-card" data-value="Walking">
                                 <input type="radio" id="transportWalk" name="transport" value="Walking">
@@ -1185,7 +1202,10 @@
     <div class="about-overlay" id="aboutOverlay" onclick="hideAboutDialog()">
         <div class="about-dialog" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="hideAboutDialog()">×</button>
-            <h3>About</h3>
+            <div class="about-header">
+                <img src="app-logo-192x192.png" alt="Kochi Trip Planner" class="about-logo">
+                <h3>About</h3>
+            </div>
             <div class="credits">
                 <p><strong>കഥ, തിരക്കഥ, സംഭാഷണം:</strong> ഇന്ദു പൊന്നപ്പനും സുഹൃത്തുക്കളും</p>
                 <p><strong>സംവിധാനം, നിർമാണം:</strong> ഇന്റലിജന്റ്ഷ്യ</p>
